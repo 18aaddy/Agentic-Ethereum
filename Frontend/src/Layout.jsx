@@ -8,7 +8,7 @@ import {
   Outlet,
 } from "react-router-dom";
 import Sidebar from "./Sidebar";
-
+import WalletConnect from "./WalletConnect";
 
 export default function Layout() {
 
@@ -89,11 +89,7 @@ export default function Layout() {
                   </div>
                 </div>
                 <div className="grow shrink basis-0   flex-col justify-center items-end gap-[2.5px] inline-flex">
-                  <div className="w-[182.99px] h-[42.23px] bg-[#ffffff] rounded-[10.75px] justify-end items-center gap-[9.60px] inline-flex">
-                    <div className="grow shrink basis-0 text-center text-black text-[13.44px] font-[500] font-['Inter']">
-                      Connect wallet
-                    </div>
-                  </div>
+                  <WalletConnect/>
                 </div>
               </div>
 
@@ -104,7 +100,7 @@ export default function Layout() {
          
       <div className="self-stretch h-full px-[60px]  justify-start items-start gap-[12px] inline-flex">
       <Sidebar/>
-      <div className="self-stretch w-full overflow-y-auto custom-scrollbar justify-start items-start gap-12 inline-flex">
+      <div className="self-stretch w-full overflow-y-auto custom-scrollbar  pb-[180px] justify-start items-start gap-12 inline-flex">
         <Outlet className=""/>
       </div>
      

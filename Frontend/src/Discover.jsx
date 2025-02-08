@@ -11,7 +11,7 @@ export default function Discover() {
   };
 
   return (
-    <div className="basis-auto w-full h-auto pb-[200px] shrink basis-0 flex-col justify-start items-start gap-[48px] inline-flex">
+    <div className="basis-auto w-full h-auto  shrink basis-0 flex-col justify-start items-start gap-[48px] inline-flex">
       <div className="self-stretch h-full  rounded-[18.25px] flex-col justify-start items-start flex">
         <div className="self-stretch h-[489.88px] flex-col justify-start items-start flex">
           <div className="self-stretch justify-end  bg-[url(src/assets/chess.png)] bg-cover bg-no-repeat bg-center h-[489.88px]  rounded-[18.25px]">
@@ -34,12 +34,12 @@ export default function Discover() {
                       to raise{" "}
                     </div>
                   </div>
-                  <div className="w-[182.35px] h-[42.23px]  bg-[#ffffff] rounded-[10.75px] justify-center items-center gap-[9.60px] inline-flex">
-                    <div    onClick={handleClick} className="grow shrink basis-0 text-center text-black text-[13.44px] font-semibold font-['Inter'] transition duration-300 
-                 hover:bg-black hover:text-white" >
+                  <button onClick={handleClick} className="w-[182.35px] h-[42.23px]  bg-[#ffffff] rounded-[10.75px] justify-center border-none items-center gap-[9.60px] inline-flex grow shrink basis-0 text-center text-black text-[13.44px] font-[500] font-['Inter'] transition duration-300 
+                 hover:bg-black hover:text-white">
+                    
                       Bet Now
-                    </div>
-                  </div>
+                   
+                  </button>
                 </div>
               </div>
             </div>
