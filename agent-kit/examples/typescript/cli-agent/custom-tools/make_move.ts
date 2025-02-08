@@ -2,8 +2,7 @@ import * as chains from "viem/chains";
 import { wagmiAbi } from "./abi";
 import { z } from "zod";
 import { createPublicClient, http, createWalletClient, Account, Chain, ChainDisconnectedError } from "viem";
-import { WardenAgentKit } from "@wardenprotocol/warden-agent-kit-core";
-import { WardenToolkit, WardenTool } from "@wardenprotocol/warden-langchain";
+
 
 // move type equivalent to solidity struct 
 type Move = {

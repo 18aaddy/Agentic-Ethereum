@@ -14,7 +14,12 @@ import { makeMove, makeMoveInput } from "./custom-tools/make_move";
 import { resignGame, resignGameInput } from "./custom-tools/resign_game";
 //import { initializeBoard, initializeBoardInput } from "./custom-tools/initialize_board";
 //import { isAddress, getAddress } from 'ethers';
-
+import { getBlackPlayer, getBlackPlayerInput } from "./custom-tools/blackPlayer";
+import { getWhitePlayer, getWhitePlayerInput } from "./custom-tools/whitePlayer";
+import { getCurrentTurn, getCurrentTurnInput } from "./custom-tools/currentTurn";
+import { getGameStarted, getGameStartedInput } from "./custom-tools/gameStarted";
+import { getGameOver, getGameOverInput } from "./custom-tools/gameOver";
+import { getBoard, getBoardInput } from "./custom-tools/board";
 //import { primaryChain } from "@wardenprotocol/warden-agent-kit-core/typescript/src/utils/chains.ts";
 
 dotenv.config();
@@ -98,8 +103,49 @@ async function initializeAgent() {
         //     schema: joinGameInput, // there arent any inputs to the function to be called so no schema 
         //     function :joinGame,
         // },agentkit);
+
+        const getBlackPlayerTool = new WardenTool({
+            name: "black-player",
+            description: "This tool should be called when a user wants to query the address of the blackPlayer",
+            schema: getBlackPlayerInput, // there arent any inputs to the function to be called so no schema 
+            function :getBlackPlayer,
+        },agentkit);
+
+        const getWhitePlayerTool = new WardenTool({
+            name: "white-player",
+            description: "This tool should be called when a user wants to query the address of the whitePlayer",
+            schema: getWhitePlayerInput, // there arent any inputs to the function to be called so no schema 
+            function :getWhitePlayer,
+        },agentkit);
+
+        const getCurrentTurnTool = new WardenTool({
+            name: "current-turn",
+            description: "This tool should be called when a user wants to query the current turn, if the retured value is 1 then it is the turn of the whitePlayer, otherwise if 0 is returned then it is the turn of the blackPlayer .",
+            schema: getCurrentTurnInput, // No input required
+            function: getCurrentTurn,
+        }, agentkit);
+        const getGameStartedTool = new WardenTool({
+            name: "game-started",
+            description: "This tool should be called when a user wants to query the game started status.",
+            schema: getGameStartedInput, // No input required
+            function: getGameStarted,
+        }, agentkit);
+
+        const getGameOverTool = new WardenTool({
+            name: "game-over",
+            description: "This tool should be called when a user wants to query the game over status.",
+            schema: getGameOverInput, // No input required
+            function: getGameOver,
+        }, agentkit);
+
+        const getBoardTileStatusTool = new WardenTool({
+            name: "game-over",
+            description: "This tool should be called when a user wants to query the pieceType, color of that piece and if the piece has moved and a particular tile on the chess board with the coordinates (x,y) where x and y are to be given as the input for the file.",
+            schema: getGameOverInput, // No input required
+            function: getGameOver,
+        }, agentkit);
         
-        tools.push(joinGameTool,makeMoveTool,resignGameTool);
+        tools.push(joinGameTool,makeMoveTool,resignGameTool,getBlackPlayerTool, getWhitePlayerTool, getCurrentTurnTool, getGameStartedTool, getGameOverTool, getBoardTileStatusTool);
 
         // Store buffered conversation history in memory
         const memory = new MemorySaver();
@@ -128,6 +174,50 @@ async function initializeAgent() {
 // agent initialised till here 
 
 
+  /**
+   * Run the agent autonomously with specified intervals
+   *
+   * @param agent - The agent executor
+   * @param config - Agent configuration
+   * @param interval - Time interval between actions in seconds
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async function runAutonomousMode(agent: any, config: any, interval = 10) {
+    console.log("Starting autonomous mode...");
+  
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      try {
+        const thought =
+          "You are an AI agent playing a game of chess. " +
+          "Your goal is to play the game to the best of your ability, using the tools available to you. " +
+          "If a game hasn't started yet, you should first join the game. " + "you can query if the game has started through the gameStarted viewing function" +
+          "Then, analyze the board and make strategic moves to gain an advantage. " + "you can also query the state of the board and the whose chance it is to play through the viewing functions like checking the current turn, the address of which player is playing the game" + 
+          "You have the option to resign if the situation is hopeless, but try to play skillfully first. " +
+          "Choose the best action at each turn, considering the current board state and potential future moves. " + "you can also check if the game is over through the gameOver viewing function" +
+          "Available actions include: joining the game, making a move, and resigning from the game.";
+  
+        const stream = await agent.stream({ messages: [new HumanMessage(thought)] }, config);
+  
+        for await (const chunk of stream) {
+          if ("agent" in chunk) {
+            console.log(chunk.agent.messages[0].content);
+          } else if ("tools" in chunk) {
+            console.log(chunk.tools.messages[0].content);
+          }
+          console.log("-------------------");
+        }
+  
+        await new Promise(resolve => setTimeout(resolve, interval * 1000));
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error("Error:", error.message);
+        }
+        process.exit(1);
+      }
+    }
+  }
+  
 
 async function runChatMode(agent: any, config: any) {
     console.log("Starting chat mode... Type 'exit' to end.");
@@ -172,13 +262,56 @@ async function runChatMode(agent: any, config: any) {
     }
 }
 
+
+
+  /**
+   * Choose whether to run in autonomous or chat mode based on user input
+   *
+   * @returns Selected mode
+   */
+  async function chooseMode(): Promise<"chat" | "auto"> {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+  
+    const question = (prompt: string): Promise<string> =>
+      new Promise(resolve => rl.question(prompt, resolve));
+  
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      console.log("\nAvailable modes:");
+      console.log("1. chat    - Interactive chat mode");
+      console.log("2. auto    - Autonomous action mode");
+  
+      const choice = (await question("\nChoose a mode (enter number or name): "))
+        .toLowerCase()
+        .trim();
+  
+      if (choice === "1" || choice === "chat") {
+        rl.close();
+        return "chat";
+      } else if (choice === "2" || choice === "auto") {
+        rl.close();
+        return "auto";
+      }
+      console.log("Invalid choice. Please try again.");
+    }
+  }
+
 /**
  * Start the chatbot agent
  */
 async function main() {
     try {
         const { agent, config } = await initializeAgent();
+        const mode = await chooseMode();
+       // await runChatMode(agent, config);
+       if (mode === "chat") {
         await runChatMode(agent, config);
+      } else {
+        await runAutonomousMode(agent, config);
+      }
     } catch (error) {
         if (error instanceof Error) {
             console.error("Error:", error.message);
