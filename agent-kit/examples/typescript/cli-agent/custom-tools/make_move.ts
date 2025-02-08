@@ -15,10 +15,10 @@ type Move = {
 
 // Zod schema for Move struct
 const moveSchema = z.object({
-    fromX: z.number().min(1).max(8), // Equivalent to uint8
-    fromY: z.number().min(1).max(8), // Equivalent to uint8
-    toX: z.number().min(1).max(8),   // Equivalent to uint8
-    toY: z.number().min(1).max(8),   // Equivalent to uint8
+    fromX: z.number().min(0).max(7), // Equivalent to uint8
+    fromY: z.number().min(0).max(7), // Equivalent to uint8
+    toX: z.number().min(0).max(7),   // Equivalent to uint8
+    toY: z.number().min(0).max(7),   // Equivalent to uint8
 });
 // Add the custom tool
 
