@@ -34,6 +34,7 @@ contract OnChessGame {
     }
 
     function initializeBoard() private {
+        gameOver = false;
         // Clear entire board
         for (uint8 y = 0; y < 8; y++) {
             for (uint8 x = 0; x < 8; x++) {
