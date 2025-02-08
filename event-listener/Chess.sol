@@ -33,7 +33,7 @@ contract OnChessGame {
         initializeBoard();
     }
 
-    function initializeBoard() public {
+    function initializeBoard() private {
         // Clear entire board
         for (uint8 y = 0; y < 8; y++) {
             for (uint8 x = 0; x < 8; x++) {
@@ -85,7 +85,7 @@ contract OnChessGame {
     }
 
     function makeMove(Move memory move) external {
-        require(gameStarted && !gameOver, "Game not active");
+        require(gameStarted, "Game not active");
         require(msg.sender == (currentTurn == Color.WHITE ? whitePlayer : blackPlayer), "Not your turn");
         
         Piece memory movingPiece = board[move.fromY][move.fromX];
@@ -329,10 +329,13 @@ contract OnChessGame {
         require(msg.sender == whitePlayer || msg.sender == blackPlayer, "Not a player");
 
         gameOver = true;
-        gameStarted= false;
         Color losingColor = (msg.sender == whitePlayer) ? Color.WHITE : Color.BLACK;
         address winner = (losingColor == Color.WHITE) ? blackPlayer : whitePlayer;
 
         emit GameWon(winner, losingColor == Color.WHITE ? Color.BLACK : Color.WHITE);
+        whitePlayer = address(0);
+        blackPlayer = address(0);
+        gameStarted = false;
+        initializeBoard();
     }
 }

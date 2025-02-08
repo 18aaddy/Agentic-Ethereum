@@ -1,5 +1,3 @@
-// api-client.js
-
 class ChessApiClient {
   constructor(
     baseUrl = "http://127.0.0.1:5000"
@@ -7,15 +5,6 @@ class ChessApiClient {
     this.baseUrl = baseUrl;
   }
 
-  /**
-   * Make a move on the chess board
-   * @param {number} fromX - Starting X coordinate
-   * @param {number} fromY - Starting Y coordinate
-   * @param {number} toX - Destination X coordinate
-   * @param {number} toY - Destination Y coordinate
-   * @param {string} color - Color of the piece ('white' or 'black')
-   * @returns {Promise} Response from the server
-   */
   async makeMove(fromX, fromY, toX, toY) {
     let color = "black";
     try {
@@ -59,14 +48,5 @@ class ChessApiClient {
     }
   }
 }
-
-// //   Example usage:
-//   const chessApi = new ChessApiClient();
-//   try {
-//     const result = await chessApi.makeMove(4, 6, 4, 5, 'black');
-//     console.log('Move successful:', result);
-//   } catch (error) {
-//     console.error('Failed to make move:', error);
-//   }
 
 export default ChessApiClient;

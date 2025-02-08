@@ -5,7 +5,7 @@ import ChessApiClient from './api.js';
 
 const abi = abiModule.default;
 const contractAddress = '0xC0F6b954712c485e1f95f56ed1DB3E13A149B658';
-const chessApi = new ChessApiClient(); // Instantiate ChessApiClient
+const chessApi = new ChessApiClient();
 
 async function main() {
     const client = createPublicClient({
