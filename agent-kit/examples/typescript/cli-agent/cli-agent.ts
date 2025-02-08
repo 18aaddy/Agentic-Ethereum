@@ -7,10 +7,9 @@ import { ChatOpenAI } from "@langchain/openai";
 // import { ChatOllama } from "@langchain/ollama";
 import * as dotenv from "dotenv";
 import * as readline from "readline";
-import { z } from "zod";
-import { createPublicClient, http, createWalletClient, Account, Chain, ChainDisconnectedError } from "viem";
-import * as chains from "viem/chains";
-import { wagmiAbi } from "./abi";
+
+
+import { joinGame, joinGameInput } from "./custom-tools/join_game";
 //import { isAddress, getAddress } from 'ethers';
 
 //import { primaryChain } from "@wardenprotocol/warden-agent-kit-core/typescript/src/utils/chains.ts";
@@ -69,65 +68,15 @@ async function initializeAgent() {
         const wardenToolkit = new WardenToolkit(agentkit);
         const tools = wardenToolkit.getTools();
 
-        
-        // Add the custom tool
-        const customTool = new WardenTool({
+        const joinGameTool = new WardenTool({
             name: "join_game",
             description: "This tool should be called when a user wants to join the game of chess",
-            schema: z.object({}), // there arent any inputs to the function to be called so no schema 
-            function: async (account: Account) => {
-                try {
-                    //return `Feature coming soon! Keep an eye out for updates.`;
-                    const publicClient = createPublicClient({
-                        chain: chains.sepolia,
-                        transport: http(),
-                    });
-                    //createPublicClient is used to create a client for reading data from the blockchain. This is used for tasks like querying blockchain state, reading from smart contracts, fetching account balances, etc. It is a read-only client, meaning it cannot send transactions or modify the blockchain.
-            
-                    const walletClient = createWalletClient({
-                        account,// address of the key of the ai agent will be fetched automatooically
-                        chain: chains.sepolia,
-                        transport: http(),
-                    });
-                    //createWalletClient is used to create a client that can send transactions on behalf of a wallet. This is typically used when you want to sign and broadcast transactions, such as deploying contracts, sending Ether, or interacting with smart contracts that modify the blockchain state (i.e., write functions).
-                    
-                    // const { request } = await publicClient.simulateContract({
-                    //     account,
-                    //     address: '0x75ac550f6971bee2ef4e19757af8a5de0ba0207d',
-                    //     abi: wagmiAbi,
-                    //     functionName: 'joinGame',
-                    //   });
-                    
-
-                    const hash = await walletClient.writeContract({
-                        address: '0x75ac550  f6971bee2ef4e19757af8a5de0ba0207d',
-                        abi: wagmiAbi,
-                        functionName: 'joinGame',
-                        account,
-                      })
-                    //const hash = await walletClient.writeContract(request);
-
-                    // Native token transfer
-                    // const hash = await walletClient.sendTransaction({
-                    //     to: args.recipient as `0x${string}`,
-                    //     value: BigInt(args.amount),
-                    // });
-            
-                    const receipt = await publicClient.waitForTransactionReceipt({
-                        hash,
-                    });
-            
-                    if (receipt.status === "success") {
-                        return `Successfully sent chess contract. Transaction hash: ${receipt.transactionHash}`;
-                    } else {
-                        throw new Error("Transaction failed");
-                    }
-                } catch (error) {
-                    return `Error sending tokens: ${error}`;
-                } // Implement the tool's logic
-            },
+            schema: joinGameInput, // there arent any inputs to the function to be called so no schema 
+            function :joinGame,
         },agentkit);
-        tools.push(customTool);
+        
+        
+        tools.push(joinGameTool);
 
         // Store buffered conversation history in memory
         const memory = new MemorySaver();
