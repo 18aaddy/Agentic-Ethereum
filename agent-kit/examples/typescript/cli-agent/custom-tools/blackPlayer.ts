@@ -2,6 +2,7 @@ import * as chains from "viem/chains";
 import { wagmiAbi } from "./abi";
 import { z } from "zod";
 import { createPublicClient, http, Account, Chain, ChainDisconnectedError } from "viem";
+import { contract_address } from "./address";
 
 export const getBlackPlayerInput = z.object({});
 
@@ -20,7 +21,7 @@ export async function getBlackPlayer(
             transport: http()
           });
           const data = await publicClient.readContract({
-            address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
+            address: contract_address,
             abi: wagmiAbi,
             functionName: 'blackPlayer',
           })

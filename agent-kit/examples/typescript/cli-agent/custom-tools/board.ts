@@ -2,6 +2,7 @@ import * as chains from "viem/chains";
 import { wagmiAbi } from "./abi";
 import { z } from "zod";
 import { createPublicClient, http } from "viem";
+import { contract_address } from "./address";
 
 // Zod schema for input validation (x and y coordinates for the board position)
 export const getBoardInput = z.object({
@@ -48,7 +49,7 @@ export async function getBoard(
 
         // Read the specific `Piece` at the given coordinates (x, y) from the contract
         const piece = await publicClient.readContract({
-            address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2', // Contract address
+            address: contract_address, // Contract address
             abi: wagmiAbi,  // ABI
             functionName: 'board',
             args: [BigInt(x), BigInt(y)],   // Pass the x and y coordinates to the contract function

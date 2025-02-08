@@ -106,34 +106,34 @@ async function initializeAgent() {
 
         const getBlackPlayerTool = new WardenTool({
             name: "black-player",
-            description: "This tool should be called when a user wants to query the address of the blackPlayer",
+            description: "This tool should be called when a user wants to query the address of the blackPlayer. To check if i am the blackPlayer compare my address with that of the blackPlayer, if it matches then i am the blackPlayer otherwise i am the whitePlayer",
             schema: getBlackPlayerInput, // there arent any inputs to the function to be called so no schema 
             function :getBlackPlayer,
         },agentkit);
 
         const getWhitePlayerTool = new WardenTool({
             name: "white-player",
-            description: "This tool should be called when a user wants to query the address of the whitePlayer",
+            description: "This tool should be called when a user wants to query the address of the whitePlayer. To check if i am the whitePlayer compare my address with that of the whitePlayer, if it matches then i am the whitePlayer otherwise i am the blackPlayer",
             schema: getWhitePlayerInput, // there arent any inputs to the function to be called so no schema 
             function :getWhitePlayer,
         },agentkit);
 
         const getCurrentTurnTool = new WardenTool({
             name: "current-turn",
-            description: "This tool should be called when a user wants to query the current turn, if the retured value is 1 then it is the turn of the whitePlayer, otherwise if 0 is returned then it is the turn of the blackPlayer .",
+            description: "This tool should be called when a user wants to query the current turn, if the retured value is 1 then it is the turn of the whitePlayer, otherwise if 0 is returned then it is the turn of the blackPlayer. to know if it is your turn check your address with that of the blackPlayer's address and the whitePlayer's address. Your color will be the one which matches with your address",
             schema: getCurrentTurnInput, // No input required
             function: getCurrentTurn,
         }, agentkit);
         const getGameStartedTool = new WardenTool({
             name: "game-started",
-            description: "This tool should be called when a user wants to query the game started status.",
+            description: "This tool should be called when a user wants to know if the game is active or not, if true is returned then the game is active and you can make a move if it is your turn",
             schema: getGameStartedInput, // No input required
             function: getGameStarted,
         }, agentkit);
 
         const getGameOverTool = new WardenTool({
             name: "game-over",
-            description: "This tool should be called when a user wants to query the game over status.",
+            description: "This tool should be called when a user wants to know if the game is still active or it has ended, if true is returned then the game is over and you first need to join the game in order to play it",
             schema: getGameOverInput, // No input required
             function: getGameOver,
         }, agentkit);
@@ -188,14 +188,18 @@ async function initializeAgent() {
     // eslint-disable-next-line no-constant-condition
     while (true) {
       try {
-        const thought =
-          "You are an AI agent playing a game of chess. " +
-          "Your goal is to play the game to the best of your ability, using the tools available to you. " +
-          "If a game hasn't started yet, you should first join the game. " + "you can query if the game has started through the gameStarted viewing function" +
-          "Then, analyze the board and make strategic moves to gain an advantage. " + "you can also query the state of the board and the whose chance it is to play through the viewing functions like checking the current turn, the address of which player is playing the game" + 
-          "You have the option to resign if the situation is hopeless, but try to play skillfully first. " +
-          "Choose the best action at each turn, considering the current board state and potential future moves. " + "you can also check if the game is over through the gameOver viewing function" +
-          "Available actions include: joining the game, making a move, and resigning from the game.";
+        const thought = 
+        "You are an AI agent playing a game of chess. " +
+        "Your primary goal is to play strategically and make the best possible moves. " +
+        "If the game hasn't started, join it first. The game begins when the other player joins. " +
+        "You can check if the game has started using the 'gameStarted' function. " +
+        "Once the game is active, analyze the board and make strategic moves using the 'makeMove' function. " +
+        "You can query the board's state, check whose turn it is, and see the players' addresses through viewing functions. " +
+        "when you are waiting for other player to move wait 15 seconds before querrying the board's states "
+        "If the situation becomes hopeless, you have the option to resign, but aim to play skillfully. " +
+        "Ensure you choose the best action for each turn, considering both the current board state and potential future moves. " +
+        "You can check if the game has ended using the 'gameOver' function. " +
+        "Available actions include: joining the game, making a move, and resigning.";
   
         const stream = await agent.stream({ messages: [new HumanMessage(thought)] }, config);
   

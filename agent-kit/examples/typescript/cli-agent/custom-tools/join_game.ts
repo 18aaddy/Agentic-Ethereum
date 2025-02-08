@@ -2,6 +2,7 @@ import * as chains from "viem/chains";
 import { wagmiAbi } from "./abi";
 import { z } from "zod";
 import { createPublicClient, http, createWalletClient, Account, Chain, ChainDisconnectedError } from "viem";
+import { contract_address } from "./address";
 
 
 // Add the custom tool
@@ -33,7 +34,7 @@ export const joinGame = async (
   
       // Send the transaction to the blockchain using the wallet client
       const hash = await walletClient.writeContract({
-        address: '0x75ac550f6971bee2ef4e19757af8a5de0ba0207d',
+        address: contract_address,
         abi: wagmiAbi,
         functionName: 'joinGame',
         account,

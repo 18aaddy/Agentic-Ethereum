@@ -2,6 +2,7 @@ import * as chains from "viem/chains";
 import { wagmiAbi } from "./abi";
 import { z } from "zod";
 import { createPublicClient, http } from "viem";
+import { contract_address } from "./address";
 
 // Zod schema for input validation (empty in this case)
 export const getGameOverInput = z.object({});
@@ -23,7 +24,7 @@ export async function getGameOver(
 
         // Read the `gameOver` from the contract
         const data: boolean = await publicClient.readContract({
-            address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2', // Contract address
+            address: contract_address, // Contract address
             abi: wagmiAbi,  // ABI
             functionName: 'gameOver',  // Contract function to read
         });
