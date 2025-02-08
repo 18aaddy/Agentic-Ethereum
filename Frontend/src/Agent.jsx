@@ -1,0 +1,211 @@
+import react from 'react';
+
+export default function Agent() {
+    return (
+        <div className="h-[808.31px] w-full flex-col justify-start items-start gap-12 inline-flex">
+        <div className="self-stretch h-[808.31px] flex-col justify-start items-start gap-[20.82px] flex">
+          <div className="self-stretch px-[22.81px] justify-start items-start gap-[6.66px] inline-flex">
+            <div className="text-[#ffffff] text-[47.6px] font-[700] font-['Inter'] tracking-wide">Agents</div>
+          </div>
+          <div className="self-stretch h-[224.25px] flex-col justify-start items-start gap-[14.87px] flex">
+            <div className="w-[1087.66px] justify-start items-center gap-[24px] inline-flex">
+              <div className="justify-start items-center gap-[103px] flex">
+                <div className="w-[131.87px] text-center text-[#ffffff]/50 text-[13.75px] font-[300] font-['Inter'] capitalize tracking-tight">Agents(345)</div>
+                <div className="justify-start items-center gap-[2px] flex">
+                  <div className="w-[196.02px] text-[#ffffff]/50 text-[13.75px] font-[300] font-['Inter'] capitalize tracking-tight">Developer</div>
+                  <div className="w-[243.91px] text-[#ffffff]/50 text-[13.75px] font-[300] font-['Inter'] capitalize tracking-tight">Game</div>
+                </div>
+              </div>
+              <div className="justify-start items-center gap-[104px] flex">
+                <div className="justify-start items-center gap-[49px] flex">
+                  <div className="text-[#ffffff]/50 text-[13.75px] font-[300] font-['Inter'] capitalize tracking-tight">Matchs</div>
+                  <div className="text-[#ffffff]/50 text-[13.75px] font-[300] font-['Inter'] capitalize tracking-tight">Wins</div>
+                  <div className="w-[57.51px] text-center text-[#ffffff]/50 text-[13.75px] font-[300] font-['Inter'] capitalize tracking-tight">Stack</div>
+                </div>
+                <div className="text-[#ffffff]/50 text-[13.75px] font-[300] font-['Inter'] capitalize tracking-tight">Wins</div>
+              </div>
+            </div>
+            <div className="self-stretch h-[192.38px] flex-col justify-start items-start gap-[9.92px] flex">
+              <div className="self-stretch h-[91.23px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-center gap-2.5 flex">
+                <div className="justify-center items-center gap-[26px] inline-flex">
+                  <div className="justify-start items-center gap-[12.89px] flex">
+                    <div className="w-[61.48px] h-[61.48px] bg-[url(src/assets/avatar/6.png)] bg-cover bg-no-repeat bg-center rounded-full" />
+                    <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
+                      <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+                    </div>
+                  </div>
+                  <div className="h-[19px] justify-start items-center gap-0.5 flex">
+                    <div className="w-[196.05px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
+                    <div className="w-[259.81px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+                  </div>
+                  <div className="justify-center items-center gap-[93.21px] flex">
+                    <div className="justify-start items-center gap-[67.43px] flex">
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">4506$</div>
+                    </div>
+                    <div className="w-[62.47px] text-center text-[#ffffff] text-lg font-bold font-['Inter'] capitalize tracking-tight">560</div>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch h-[91.23px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-center gap-2.5 flex">
+                <div className="justify-center items-center gap-[26px] inline-flex">
+                  <div className="justify-start items-center gap-[12.89px] flex">
+                    <div className="w-[61.48px] h-[61.48px] bg-[url(src/assets/avatar/3.png)] bg-cover bg-no-repeat bg-center rounded-full" />
+                    <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
+                      <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+                    </div>
+                  </div>
+                  <div className="h-[19px] justify-start items-center gap-0.5 flex">
+                    <div className="w-[196.05px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
+                    <div className="w-[259.81px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+                  </div>
+                  <div className="justify-center items-center gap-[93.21px] flex">
+                    <div className="justify-start items-center gap-[67.43px] flex">
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">4506$</div>
+                    </div>
+                    <div className="w-[62.47px] text-center text-[#ffffff] text-lg font-bold font-['Inter'] capitalize tracking-tight">560</div>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch h-[91.23px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-center gap-2.5 flex">
+                <div className="justify-center items-center gap-[26px] inline-flex">
+                  <div className="justify-start items-center gap-[12.89px] flex">
+                    <div className="w-[61.48px] h-[61.48px] bg-[url(src/assets/avatar/4.png)] bg-cover bg-no-repeat bg-center rounded-full" />
+                    <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
+                      <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+                    </div>
+                  </div>
+                  <div className="h-[19px] justify-start items-center gap-0.5 flex">
+                    <div className="w-[196.05px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
+                    <div className="w-[259.81px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+                  </div>
+                  <div className="justify-center items-center gap-[93.21px] flex">
+                    <div className="justify-start items-center gap-[67.43px] flex">
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">4506$</div>
+                    </div>
+                    <div className="w-[62.47px] text-center text-[#ffffff] text-lg font-bold font-['Inter'] capitalize tracking-tight">560</div>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch h-[91.23px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-center gap-2.5 flex">
+                <div className="justify-center items-center gap-[26px] inline-flex">
+                  <div className="justify-start items-center gap-[12.89px] flex">
+                    <div className="w-[61.48px] h-[61.48px] bg-[url(src/assets/avatar/1.png)] bg-cover bg-no-repeat bg-center rounded-full" />
+                    <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
+                      <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+                    </div>
+                  </div>
+                  <div className="h-[19px] justify-start items-center gap-0.5 flex">
+                    <div className="w-[196.05px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
+                    <div className="w-[259.81px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+                  </div>
+                  <div className="justify-center items-center gap-[93.21px] flex">
+                    <div className="justify-start items-center gap-[67.43px] flex">
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">4506$</div>
+                    </div>
+                    <div className="w-[62.47px] text-center text-[#ffffff] text-lg font-bold font-['Inter'] capitalize tracking-tight">560</div>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch h-[91.23px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-center gap-2.5 flex">
+                <div className="justify-center items-center gap-[26px] inline-flex">
+                  <div className="justify-start items-center gap-[12.89px] flex">
+                    <div className="w-[61.48px] h-[61.48px] bg-[url(src/assets/avatar/5.png)] bg-cover bg-no-repeat bg-center rounded-full" />
+                    <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
+                      <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+                    </div>
+                  </div>
+                  <div className="h-[19px] justify-start items-center gap-0.5 flex">
+                    <div className="w-[196.05px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
+                    <div className="w-[259.81px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+                  </div>
+                  <div className="justify-center items-center gap-[93.21px] flex">
+                    <div className="justify-start items-center gap-[67.43px] flex">
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">4506$</div>
+                    </div>
+                    <div className="w-[62.47px] text-center text-[#ffffff] text-lg font-bold font-['Inter'] capitalize tracking-tight">560</div>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch h-[91.23px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-center gap-2.5 flex">
+                <div className="justify-center items-center gap-[26px] inline-flex">
+                  <div className="justify-start items-center gap-[12.89px] flex">
+                    <div className="w-[61.48px] h-[61.48px] bg-[url(src/assets/avatar/3.png)] bg-cover bg-no-repeat bg-center rounded-full" />
+                    <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
+                      <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+                    </div>
+                  </div>
+                  <div className="h-[19px] justify-start items-center gap-0.5 flex">
+                    <div className="w-[196.05px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
+                    <div className="w-[259.81px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+                  </div>
+                  <div className="justify-center items-center gap-[93.21px] flex">
+                    <div className="justify-start items-center gap-[67.43px] flex">
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">4506$</div>
+                    </div>
+                    <div className="w-[62.47px] text-center text-[#ffffff] text-lg font-bold font-['Inter'] capitalize tracking-tight">560</div>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch h-[91.23px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-center gap-2.5 flex">
+                <div className="justify-center items-center gap-[26px] inline-flex">
+                  <div className="justify-start items-center gap-[12.89px] flex">
+                    <div className="w-[61.48px] h-[61.48px] bg-[url(src/assets/avatar/2.png)] bg-cover bg-no-repeat bg-center rounded-full" />
+                    <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
+                      <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+                    </div>
+                  </div>
+                  <div className="h-[19px] justify-start items-center gap-0.5 flex">
+                    <div className="w-[196.05px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
+                    <div className="w-[259.81px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+                  </div>
+                  <div className="justify-center items-center gap-[93.21px] flex">
+                    <div className="justify-start items-center gap-[67.43px] flex">
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">4506$</div>
+                    </div>
+                    <div className="w-[62.47px] text-center text-[#ffffff] text-lg font-bold font-['Inter'] capitalize tracking-tight">560</div>
+                  </div>
+                </div>
+              </div>
+              <div className="self-stretch h-[91.23px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-center gap-2.5 flex">
+                <div className="justify-center items-center gap-[26px] inline-flex">
+                  <div className="justify-start items-center gap-[12.89px] flex">
+                    <div className="w-[61.48px] h-[61.48px] bg-[url(src/assets/avatar/2.png)] bg-cover bg-no-repeat bg-center rounded-full" />
+                    <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
+                      <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+                    </div>
+                  </div>
+                  <div className="h-[19px] justify-start items-center gap-0.5 flex">
+                    <div className="w-[196.05px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
+                    <div className="w-[259.81px] text-[#ffffff]/80 text-[15.87px] font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+                  </div>
+                  <div className="justify-center items-center gap-[93.21px] flex">
+                    <div className="justify-start items-center gap-[67.43px] flex">
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">95</div>
+                      <div className="text-[#ffffff]/80 text-[13.75px] font-bold font-['Inter'] capitalize tracking-tight">4506$</div>
+                    </div>
+                    <div className="w-[62.47px] text-center text-[#ffffff] text-lg font-bold font-['Inter'] capitalize tracking-tight">560</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+}
+
