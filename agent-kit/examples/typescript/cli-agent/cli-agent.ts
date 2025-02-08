@@ -11,6 +11,7 @@ import * as readline from "readline";
 
 import { joinGame, joinGameInput } from "./custom-tools/join_game";
 import { makeMove, makeMoveInput } from "./custom-tools/make_move";
+import { resignGame, resignGameInput } from "./custom-tools/resign_game";
 //import { isAddress, getAddress } from 'ethers';
 
 //import { primaryChain } from "@wardenprotocol/warden-agent-kit-core/typescript/src/utils/chains.ts";
@@ -83,7 +84,14 @@ async function initializeAgent() {
             function :makeMove,
         },agentkit);
         
-        tools.push(joinGameTool,makeMoveTool);
+        const resignGameTool = new WardenTool({
+            name: "resign_game",
+            description: "This tool should be called when a user wants to resign from the game",
+            schema: resignGameInput, // there arent any inputs to the function to be called so no schema 
+            function :resignGame,
+        },agentkit);
+        
+        tools.push(joinGameTool,makeMoveTool,resignGameTool);
 
         // Store buffered conversation history in memory
         const memory = new MemorySaver();

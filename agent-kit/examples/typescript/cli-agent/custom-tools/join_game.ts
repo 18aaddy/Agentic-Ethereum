@@ -47,12 +47,12 @@ export const joinGame = async (
   
       // Check if the transaction was successful
       if (receipt.status === "success") {
-        return `Successfully sent chess contract. Transaction hash: ${receipt.transactionHash}`;
+        return `Successfully joined the game. Transaction hash: ${receipt.transactionHash}`;
       } else {
-        throw new Error("Transaction failed");
+        throw new Error("Transaction failed, coudln't join the game");
       }
     } catch (error) {
-      return `Error sending tokens: ${error}`;
+      return `Error joining game : ${error}`;
     }
   };
   

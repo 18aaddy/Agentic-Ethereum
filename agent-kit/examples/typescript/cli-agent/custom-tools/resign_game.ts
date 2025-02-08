@@ -5,34 +5,18 @@ import { createPublicClient, http, createWalletClient, Account, Chain, ChainDisc
 import { WardenAgentKit } from "@wardenprotocol/warden-agent-kit-core";
 import { WardenToolkit, WardenTool } from "@wardenprotocol/warden-langchain";
 
-// move type equivalent to solidity struct 
-type Move = {
-    fromX: number; // Corresponds to uint8 in Solidity
-    fromY: number; // Corresponds to uint8 in Solidity
-    toX: number;   // Corresponds to uint8 in Solidity
-    toY: number;   // Corresponds to uint8 in Solidity
-};
-
-// Zod schema for Move struct
-const moveSchema = z.object({
-    fromX: z.number().min(1).max(8), // Equivalent to uint8
-    fromY: z.number().min(1).max(8), // Equivalent to uint8
-    toX: z.number().min(1).max(8),   // Equivalent to uint8
-    toY: z.number().min(1).max(8),   // Equivalent to uint8
-});
 // Add the custom tool
 
 //custom tool input schema 
-export const makeMoveInput = z.object({
+export const resignGameInput = z.object({
     keyId: z.number().positive(),
-    move: moveSchema,
 });
 
 
 // Add the custom tool
-export const makeMove = async (
+export const resignGame = async (
     account: Account,
-    args: z.infer<typeof makeMoveInput>
+    args: z.infer<typeof resignGameInput>// these are the inputs for this ts function call and will be filled in by the ai agent 
   ): Promise<string> => {
     try {
       // Create a public client (for reading data from the blockchain)
@@ -47,15 +31,12 @@ export const makeMove = async (
         chain: chains.sepolia,
         transport: http(),
       });
-      
-      const move: Move = args.move;
-      console.log(move);
+  
       // Send the transaction to the blockchain using the wallet client
       const hash = await walletClient.writeContract({
         address: '0x75ac550f6971bee2ef4e19757af8a5de0ba0207d',
         abi: wagmiAbi,
-        functionName: 'makeMove',
-        args: [move],
+        functionName: 'resignGame',
         account,
       });
   
@@ -66,12 +47,12 @@ export const makeMove = async (
   
       // Check if the transaction was successful
       if (receipt.status === "success") {
-        return `Successfully moved the piece. Transaction hash: ${receipt.transactionHash}`;
+        return `Successfully resign from the game. Transaction hash: ${receipt.transactionHash}`;
       } else {
-        throw new Error("Transaction failed, couldn't make the move");
+        throw new Error("Transaction failed, coudln't resign from the game");
       }
     } catch (error) {
-      return `Error making the move: ${error}`;
+      return `Error resigning: ${error}`;
     }
   };
   
