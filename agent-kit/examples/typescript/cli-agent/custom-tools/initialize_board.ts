@@ -1,0 +1,58 @@
+// import * as chains from "viem/chains";
+// import { wagmiAbi } from "./abi";
+// import { z } from "zod";
+// import { createPublicClient, http, createWalletClient, Account, Chain, ChainDisconnectedError } from "viem";
+// import { WardenAgentKit } from "@wardenprotocol/warden-agent-kit-core";
+// import { WardenToolkit, WardenTool } from "@wardenprotocol/warden-langchain";
+
+// // Add the custom tool
+
+// //custom tool input schema 
+// export const initializeBoardInput = z.object({
+//     keyId: z.number().positive(),
+// });
+
+
+// // Add the custom tool
+// export const initializeBoard = async (
+//     account: Account,
+//     args: z.infer<typeof initializeBoardInput>// these are the inputs for this ts function call and will be filled in by the ai agent 
+//   ): Promise<string> => {
+//     try {
+//       // Create a public client (for reading data from the blockchain)
+//       const publicClient = createPublicClient({
+//         chain: chains.sepolia,
+//         transport: http(),
+//       });
+  
+//       // Create a wallet client (for signing transactions)
+//       const walletClient = createWalletClient({
+//         account, // address of the key of the AI agent will be fetched automatically
+//         chain: chains.sepolia,
+//         transport: http(),
+//       });
+  
+//       // Send the transaction to the blockchain using the wallet client
+//       const hash = await walletClient.writeContract({
+//         address: '0x75ac550f6971bee2ef4e19757af8a5de0ba0207d',
+//         abi: wagmiAbi,
+//         functionName: 'initializeBoard',
+//         account,
+//       });
+  
+//       // Wait for the transaction receipt using the public client
+//       const receipt = await publicClient.waitForTransactionReceipt({
+//         hash,
+//       });
+  
+//       // Check if the transaction was successful
+//       if (receipt.status === "success") {
+//         return `Successfully joined the game. Transaction hash: ${receipt.transactionHash}`;
+//       } else {
+//         throw new Error("Transaction failed, coudln't join the game");
+//       }
+//     } catch (error) {
+//       return `Error joining game : ${error}`;
+//     }
+//   };
+  

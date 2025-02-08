@@ -12,6 +12,7 @@ import * as readline from "readline";
 import { joinGame, joinGameInput } from "./custom-tools/join_game";
 import { makeMove, makeMoveInput } from "./custom-tools/make_move";
 import { resignGame, resignGameInput } from "./custom-tools/resign_game";
+//import { initializeBoard, initializeBoardInput } from "./custom-tools/initialize_board";
 //import { isAddress, getAddress } from 'ethers';
 
 //import { primaryChain } from "@wardenprotocol/warden-agent-kit-core/typescript/src/utils/chains.ts";
@@ -90,6 +91,13 @@ async function initializeAgent() {
             schema: resignGameInput, // there arent any inputs to the function to be called so no schema 
             function :resignGame,
         },agentkit);
+
+        // const initializeBoardTool = new WardenTool({
+        //     name: "initialze_board",
+        //     description: "This tool should be called when a user wants to initialise a new board",
+        //     schema: joinGameInput, // there arent any inputs to the function to be called so no schema 
+        //     function :joinGame,
+        // },agentkit);
         
         tools.push(joinGameTool,makeMoveTool,resignGameTool);
 

@@ -33,7 +33,7 @@ contract OnChessGame {
         initializeBoard();
     }
 
-    function initializeBoard() private {
+    function initializeBoard() public {
         // Clear entire board
         for (uint8 y = 0; y < 8; y++) {
             for (uint8 x = 0; x < 8; x++) {
@@ -329,6 +329,7 @@ contract OnChessGame {
         require(msg.sender == whitePlayer || msg.sender == blackPlayer, "Not a player");
 
         gameOver = true;
+        gameStarted= false;
         Color losingColor = (msg.sender == whitePlayer) ? Color.WHITE : Color.BLACK;
         address winner = (losingColor == Color.WHITE) ? blackPlayer : whitePlayer;
 
