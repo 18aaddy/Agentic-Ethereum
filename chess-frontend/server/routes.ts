@@ -45,5 +45,18 @@ export function registerRoutes(app: Express): Server {
     res.json({ success: true });
   });
 
+  // New endpoint to initialize a new game
+  app.post('/api/game/new', (_req, res) => {
+    // Broadcast game initialization to all connected clients
+    const resetMessage = { type: 'reset' };
+    wsServer.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify(resetMessage));
+      }
+    });
+
+    res.json({ success: true, message: 'New game initialized' });
+  });
+
   return httpServer;
 }

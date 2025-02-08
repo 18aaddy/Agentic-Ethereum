@@ -4,8 +4,10 @@ import * as abiModule from './abi.json' assert { type: 'json' };
 import ChessApiClient from './api.js';
 
 const abi = abiModule.default;
-const contractAddress = '0xC0F6b954712c485e1f95f56ed1DB3E13A149B658';
+const contractAddress = '0x00D30c054CcC785Bf826E2f31168e82e15bec4dC';
 const chessApi = new ChessApiClient();
+
+
 
 async function main() {
     const client = createPublicClient({
@@ -43,8 +45,8 @@ async function watchChessEvents(client, eventSignature) {
         address: contractAddress,
         abi: abi,
         eventName: 'GameStarted',
-        onLogs: (logs) => {
-            logs.forEach(log => {
+        onLogs: async (logs) => {
+            for (const log of logs) {
                 const { whitePlayer, blackPlayer } = log.args;
                 console.log('Event signature:', log.topics[0]);
                 console.log('White player:', whitePlayer);
@@ -52,9 +54,17 @@ async function watchChessEvents(client, eventSignature) {
                 if (log.topics[0] === eventSignature) {
                     console.log('Signature matches!');
                 }
-            });
+                try {
+                    const chessApi = new ChessApiClient();
+                    const response = await chessApi.startNewGame();
+                    console.log('New game started successfully:', response);
+                } catch (error) {
+                    console.error('Failed to start new game:', error);
+                }
+            }
         }
     });
+    
 
     const unWatchMoveMade = await client.watchContractEvent({
         address: contractAddress,

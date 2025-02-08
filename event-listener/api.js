@@ -1,7 +1,5 @@
 class ChessApiClient {
-  constructor(
-    baseUrl = "http://127.0.0.1:5000"
-  ) {
+  constructor(baseUrl = "http://127.0.0.1:5000") {
     this.baseUrl = baseUrl;
   }
 
@@ -34,6 +32,27 @@ class ChessApiClient {
           toY,
           color,
         }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to make move");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error making move:", error.message);
+      throw error;
+    }
+  }
+
+  async startNewGame() {
+    try {
+      const response = await fetch(`${this.baseUrl}/api/game/new`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       if (!response.ok) {

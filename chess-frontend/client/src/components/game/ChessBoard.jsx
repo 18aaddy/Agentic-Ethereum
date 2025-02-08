@@ -45,6 +45,26 @@ export default function ChessBoard() {
     }
   };
 
+  const handleWebSocketMessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+
+      // Handle reset message
+      if (data.type === 'reset') {
+        console.log('Resetting game to initial position');
+        setGame(new Chess()); // Creates a new game with default position
+        setErrorMsg('');
+        return;
+      }
+
+      // Handle move message
+      console.log('Received move data:', data);
+      makeMove(data);
+    } catch (error) {
+      console.error('Error processing WebSocket message:', error);
+    }
+  };
+
   useEffect(() => {
     // Connect to WebSocket with specific path
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
@@ -55,15 +75,7 @@ export default function ChessBoard() {
       setErrorMsg('');
     };
 
-    ws.onmessage = (event) => {
-      try {
-        const moveData = JSON.parse(event.data);
-        console.log('Received move data:', moveData);
-        makeMove(moveData);
-      } catch (error) {
-        console.error('Error processing WebSocket message:', error);
-      }
-    };
+    ws.onmessage = handleWebSocketMessage;
 
     ws.onerror = (error) => {
       console.error('WebSocket error:', error);
