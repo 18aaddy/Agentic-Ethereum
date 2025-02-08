@@ -5,18 +5,34 @@ import { createPublicClient, http, createWalletClient, Account, Chain, ChainDisc
 import { WardenAgentKit } from "@wardenprotocol/warden-agent-kit-core";
 import { WardenToolkit, WardenTool } from "@wardenprotocol/warden-langchain";
 
+// move type equivalent to solidity struct 
+type Move = {
+    fromX: number; // Corresponds to uint8 in Solidity
+    fromY: number; // Corresponds to uint8 in Solidity
+    toX: number;   // Corresponds to uint8 in Solidity
+    toY: number;   // Corresponds to uint8 in Solidity
+};
+
+// Zod schema for Move struct
+const moveSchema = z.object({
+    fromX: z.number().min(1).max(8), // Equivalent to uint8
+    fromY: z.number().min(1).max(8), // Equivalent to uint8
+    toX: z.number().min(1).max(8),   // Equivalent to uint8
+    toY: z.number().min(1).max(8),   // Equivalent to uint8
+});
 // Add the custom tool
 
 //custom tool input schema 
-export const joinGameInput = z.object({
+export const makeMoveInput = z.object({
     keyId: z.number().positive(),
+    move: moveSchema,
 });
 
 
 // Add the custom tool
-export const joinGame = async (
+export const makeMove = async (
     account: Account,
-    args: z.infer<typeof joinGameInput>// these are the inputs for this ts function call and will be filled in by the ai agent 
+    args: z.infer<typeof makeMoveInput>
   ): Promise<string> => {
     try {
       // Create a public client (for reading data from the blockchain)
@@ -31,12 +47,15 @@ export const joinGame = async (
         chain: chains.sepolia,
         transport: http(),
       });
-  
+      
+      const move: Move = args.move;
+      console.log(move);
       // Send the transaction to the blockchain using the wallet client
       const hash = await walletClient.writeContract({
         address: '0x75ac550f6971bee2ef4e19757af8a5de0ba0207d',
         abi: wagmiAbi,
-        functionName: 'joinGame',
+        functionName: 'makeMove',
+        args: [move],
         account,
       });
   

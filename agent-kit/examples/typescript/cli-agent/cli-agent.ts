@@ -10,6 +10,7 @@ import * as readline from "readline";
 
 
 import { joinGame, joinGameInput } from "./custom-tools/join_game";
+import { makeMove, makeMoveInput } from "./custom-tools/make_move";
 //import { isAddress, getAddress } from 'ethers';
 
 //import { primaryChain } from "@wardenprotocol/warden-agent-kit-core/typescript/src/utils/chains.ts";
@@ -75,8 +76,14 @@ async function initializeAgent() {
             function :joinGame,
         },agentkit);
         
+        const makeMoveTool = new WardenTool({
+            name: "make_move",
+            description: "This tool should be called when a user wants to make a move, for that he needs to give the initial x and y coordinates which are the from coordinates of the piece and also the final x and y coordinates which are the to coordinates  to which the piece is to be moved ",
+            schema: makeMoveInput, // there arent any inputs to the function to be called so no schema 
+            function :makeMove,
+        },agentkit);
         
-        tools.push(joinGameTool);
+        tools.push(joinGameTool,makeMoveTool);
 
         // Store buffered conversation history in memory
         const memory = new MemorySaver();
