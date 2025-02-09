@@ -1,8 +1,22 @@
 import react from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Game() {
-    return (
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    setTimeout(() => {
+      navigate("/ChessGame");
+    }, 100); // 500ms delay
+  };
+
+
+
+
+    return (
+    
   <div className="self-stretch h-[766.76px] w-full justify-start items-start gap-[43.55px] inline-flex">
     <div className="grow shrink basis-0 h-[670.24px] flex-col justify-start items-start gap-[32.63px] inline-flex overflow-hidden">
       <div className="self-stretch h-[156.47px] flex-col justify-start items-start gap-[31.67px] flex">
@@ -62,12 +76,14 @@ export default function Game() {
     <div className="self-stretch h-[204.35px] flex-col justify-start items-start gap-[19.83px] flex">
       <div className="self-stretch h-[92.26px] flex-col justify-start items-start gap-[18.84px] flex">
         <div className="self-stretch text-[#ffffff] text-base  px-[8.65px] font-medium font-['Inter'] capitalize tracking-tight">betting amount</div>
-        <div className="self-stretch h-[54.42px] bg-[#d9d9d9]/10 rounded-[12.47px]" />
+        {/* <div className="self-stretch h-[54.42px] bg-[#d9d9d9]/10 rounded-[12.47px]" /> */}
+        <input type="number" placeholder="amount"  className="w-full h-[54.42px] text-center text-[#ffffff] text-[18px] placeholder:text-[18px] placeholder:font-normal font-semibold font-['Inter'] capitalize tracking-tight border-0 focus:outline-none bg-[#d9d9d9]/10 rounded-[12.47px] flex items-center justify-center px-4 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"></input>
       </div>
       <div className="self-stretch h-[92.26px] flex-col justify-start items-start gap-[18.84px] flex">
         <div className="self-stretch text-[#ffffff]  px-[8.65px] text-base font-medium font-['Inter'] capitalize">time remain : 00:05:25</div>
         <div className="self-stretch h-[54.42px] bg-[#ffffff] rounded-[12.47px] flex-col justify-center items-center flex">
-          <div className="w-[362.88px] h-[18.84px] text-center text-black text-base font-semibold font-['Inter'] capitalize tracking-tight">place bet</div>
+          <button onClick={handleClick}className="w-[182.35px] h-[42.23px]  bg-[#ffffff] rounded-[10.75px] justify-center border-none items-center gap-[9.60px] inline-flex grow shrink basis-0 text-center text-black text-[16.44px] font-[500] font-['Inter'] transition duration-300 
+                 hover:bg-black hover:text-white">Place Bet</button>
         </div>
       </div>
     </div>
@@ -78,3 +94,6 @@ export default function Game() {
     )
 }
 
+
+
+{/* <button onClick={handleClick} className="w-[362.88px] h-[18.84px] text-center text-black text-base font-semibold font-['Inter'] capitalize tracking-tight">place bet</button> */}
