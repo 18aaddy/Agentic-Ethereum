@@ -3,7 +3,6 @@ import React,{useState} from "react";
 import WalletConnect from "./WalletConnect";
 import Popup from "./Popup";
 import { createPortal } from "react-dom";
-<<<<<<< HEAD
 import { ethers } from "ethers";
 
 // Contract configuration
@@ -57,13 +56,6 @@ export default function Profile() {
     }
   };
 
-=======
-
-
-export default function Profile() {
-   const [isOpen, setIsOpen] = useState(false);
-  
->>>>>>> 271fb19 (update)
   return (
     <div className="h-[1022.81px] flex-col justify-start items-start gap-2.5 inline-flex">
       <div className="self-stretch h-[1022.81px] flex-col justify-start items-start gap-[60px] flex">
@@ -95,7 +87,6 @@ export default function Profile() {
 
 
       <button
-<<<<<<< HEAD
         onClick={handleClaim}
         disabled={isLoading}
         className="w-[120px] h-[41.345px] px-[0.96px] bg-[#ffffff] rounded-[10.52px] justify-center items-center gap-[9.40px] border-0 inline-flex transition-colors delay-50 duration-50 ease-in-out disabled:opacity-50"
@@ -106,18 +97,6 @@ export default function Profile() {
           </div>
         </div>
       </button>
-=======
-            
-             className="w-[120px] h-[41.345px] px-[0.96px] bg-[#ffffff] rounded-[10.52px] justify-center items-center gap-[9.40px] border-0 inline-flex  transition-colors delay-50 duration-50 ease-in-out "
-           >
-             <div className="justify-start items-center flex">
-    
-     <div className="w-[90.14px] text-center text-[#000000]/80  text-[15.03px] font-medium font-['Inter']">
-       Claims
-     </div>
-     </div>
-           </button>
->>>>>>> 271fb19 (update)
      
 
         
@@ -198,33 +177,33 @@ export default function Profile() {
                     <div className="w-[159px] flex-col justify-start items-start gap-[32px] inline-flex">
                       <div className="self-stretch h-[65px] flex-col justify-start items-start gap-[8px] flex">
                         <div className="self-stretch justify-start items-center gap-[12px] inline-flex">
-                          <div className="w-[19px] h-[19px] relative" />
+                       
                           <div className="grow shrink basis-0 text-[#ffffff]/80 text-base font-medium font-['Inter'] capitalize tracking-tight">
-                            Stack
+                            Stake
                           </div>
                         </div>
                         <div className="self-stretch">
                           <span class="text-[#ffffff] text-[31.11px] font-[500] font-['Inter'] lowercase tracking-tight">
-                            702.3
+                            $5467
                           </span>
                           <span class="text-[#ffffff] text-[31.11px] font-semibold font-['Inter'] uppercase tracking-tight">
-                            K
+                            
                           </span>
                         </div>
                       </div>
                       <div className="self-stretch h-[65px] flex-col justify-start items-start gap-[8px] flex">
                         <div className="self-stretch justify-start items-center gap-[12px] inline-flex">
-                          <div className="w-[19px] h-[19px] relative" />
+                          
                           <div className="grow shrink basis-0 text-[#ffffff]/80 text-base font-medium font-['Inter'] capitalize tracking-tight">
                             bets
                           </div>
                         </div>
                         <div className="self-stretch">
                           <span class="text-[#ffffff] text-[31.11px] font-[500] font-['Inter'] lowercase tracking-tight">
-                            702.3
+                            16
                           </span>
                           <span class="text-[#ffffff] text-[31.11px] font-semibold font-['Inter'] uppercase tracking-tight">
-                            K
+                            
                           </span>
                         </div>
                       </div>
@@ -232,33 +211,33 @@ export default function Profile() {
                     <div className="w-[159px] flex-col justify-start items-start gap-[32px] inline-flex">
                       <div className="self-stretch h-[65px] flex-col justify-start items-start gap-[8px] flex">
                         <div className="self-stretch justify-start items-center gap-[12px] inline-flex">
-                          <div className="w-[19px] h-[19px] relative" />
+                         
                           <div className="grow shrink basis-0 text-[#ffffff]/80 text-base font-medium font-['Inter'] capitalize tracking-tight">
                             rewards
                           </div>
                         </div>
                         <div className="self-stretch">
                           <span class="text-[#ffffff] text-[31.11px] font-[500] font-['Inter'] lowercase tracking-tight">
-                            702.3
+                            $6780
                           </span>
                           <span class="text-[#ffffff] text-[31.11px] font-semibold font-['Inter'] uppercase tracking-tight">
-                            K
+                            
                           </span>
                         </div>
                       </div>
                       <div className="self-stretch h-[65px] flex-col justify-start items-start gap-[8px] flex">
                         <div className="self-stretch justify-start items-center gap-[12px] inline-flex">
-                          <div className="w-[19px] h-[19px] relative" />
+                          
                           <div className="grow shrink basis-0 text-[#ffffff]/80 text-base font-medium font-['Inter'] capitalize tracking-tight">
                             wins
                           </div>
                         </div>
                         <div className="self-stretch">
                           <span class="text-[#ffffff] text-[31.11px] font-[500] font-['Inter'] lowercase tracking-tight">
-                            702.3
+                            10
                           </span>
                           <span class="text-[#ffffff] text-[31.11px] font-semibold font-['Inter'] uppercase tracking-tight">
-                            K
+                            
                           </span>
                         </div>
                       </div>

@@ -23,7 +23,7 @@ export default function Layout() {
              <div className="self-stretch px-[60px]   justify-start items-center gap-[300px] inline-flex">
                 <div className="justify-start items-center gap-[65px] flex">
                   <div className="w-[209px] flex-col justify-start items-start gap-[2.5px] inline-flex">
-                    <div className="self-stretch h-[46px] bg-[#d9d9d9]/5 rounded-[10px]" />
+                    <div className="self-stretch h-[46px] bg-[url(src/assets/logo.png)] bg-cover bg-no-repeat bg-center  rounded-[10px]" />
                   </div>
                   <div className="justify-start items-center gap-[34px] flex">
                     <div className="w-[259.58px] h-[46.11px] px-[16px] bg-[#d9d9d9]/10 rounded-[35.54px] flex-col justify-center items-start gap-[2.5px] inline-flex">
