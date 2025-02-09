@@ -14,7 +14,7 @@ export default function Agent() {
   <div className="self-stretch px-[14px] justify-between items-center inline-flex">
     <div className="h-[17px] px-[10px] justify-start items-center gap-[12.89px] flex">
       <div className="w-[160.47px] flex-col justify-start items-start gap-[5.64px] inline-flex">
-        <div className=" text-[#ffffff]/50 text-[14.75px] font-[400] font-['Inter'] capitalize tracking-tight">Agents(345)</div>
+        <div className=" text-[#ffffff]/50 text-[14.75px] font-[400] font-['Inter'] capitalize tracking-tight">Agents(6)</div>
       </div>
     </div>
     <div className="h-[17px] justify-start items-center gap-0.5 flex">
@@ -37,7 +37,7 @@ export default function Agent() {
         <div className="justify-start items-center gap-[12.89px] flex">
           <div className="w-[61.48px] h-[61.48px] bg-[url(src/assets/avatar/4.png)] bg-cover bg-no-repeat bg-center rounded-full" />
           <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
-            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">Pikachu</div>
           </div>
         </div>
         <div className="h-[19px] justify-start items-center gap-0.5 flex">
@@ -61,12 +61,13 @@ export default function Agent() {
         <div className="justify-start items-center gap-[12.89px] flex">
           <div className="w-[61.48px] h-[61.48px]  bg-[url(src/assets/avatar/2.png)] bg-cover bg-no-repeat bg-center rounded-full" />
           <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
-            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">Shinchan</div>
           </div>
         </div>
         <div className="h-[19px] justify-start items-center gap-0.5 flex">
           <div className="w-[196.05px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
-          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Crokinole 
+          </div>
         </div>
         <div className="justify-center items-center gap-[93.21px] flex">
           <div className="justify-start items-center gap-[67.43px] flex">
@@ -85,12 +86,13 @@ export default function Agent() {
         <div className="justify-start items-center gap-[12.89px] flex">
           <div className="w-[61.48px] h-[61.48px]  bg-[url(src/assets/avatar/3.png)] bg-cover bg-no-repeat bg-center rounded-full" />
           <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
-            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">Doremon</div>
           </div>
         </div>
         <div className="h-[19px] justify-start items-center gap-0.5 flex">
           <div className="w-[196.05px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
-          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Four in a row 
+          </div>
         </div>
         <div className="justify-center items-center gap-[93.21px] flex">
           <div className="justify-start items-center gap-[67.43px] flex">
@@ -109,12 +111,13 @@ export default function Agent() {
         <div className="justify-start items-center gap-[12.89px] flex">
           <div className="w-[61.48px] h-[61.48px]  bg-[url(src/assets/avatar/5.png)] bg-cover bg-no-repeat bg-center rounded-full" />
           <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
-            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">Takeshi</div>
           </div>
         </div>
         <div className="h-[19px] justify-start items-center gap-0.5 flex">
           <div className="w-[196.05px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
-          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Helldivers II 
+          </div>
         </div>
         <div className="justify-center items-center gap-[93.21px] flex">
           <div className="justify-start items-center gap-[67.43px] flex">
@@ -133,12 +136,13 @@ export default function Agent() {
         <div className="justify-start items-center gap-[12.89px] flex">
           <div className="w-[61.48px] h-[61.48px]  bg-[url(src/assets/avatar/1.png)] bg-cover bg-no-repeat bg-center rounded-full" />
           <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
-            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">Suneo</div>
           </div>
         </div>
         <div className="h-[19px] justify-start items-center gap-0.5 flex">
           <div className="w-[196.05px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
-          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Fortnite (2017) 
+          </div>
         </div>
         <div className="justify-center items-center gap-[93.21px] flex">
           <div className="justify-start items-center gap-[67.43px] flex">
@@ -157,12 +161,12 @@ export default function Agent() {
         <div className="justify-start items-center gap-[12.89px] flex">
           <div className="w-[61.48px] h-[61.48px]  bg-[url(src/assets/avatar/6.png)] bg-cover bg-no-repeat bg-center rounded-full" />
           <div className="w-[107.10px] flex-col justify-start items-start gap-[5.64px] inline-flex">
-            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">nobita</div>
+            <div className="self-stretch text-[#ffffff] text-[21.87px] font-[500] font-['Inter'] capitalize tracking-tight">Dorami</div>
           </div>
         </div>
         <div className="h-[19px] justify-start items-center gap-0.5 flex">
           <div className="w-[196.05px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">@Kai_234</div>
-          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Clash of clans</div>
+          <div className="w-[259.81px] text-[#ffffff]/80 text-base font-[300] font-['Inter'] capitalize tracking-tight">Call of Duty: Warzone</div>
         </div>
         <div className="justify-center items-center gap-[93.21px] flex">
           <div className="justify-start items-center gap-[67.43px] flex">

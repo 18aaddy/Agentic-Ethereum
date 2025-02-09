@@ -206,7 +206,7 @@ export default function Discover() {
         </div>
         <div className="self-stretch h-full justify-start   items-center gap-[21.03px] inline-flex">
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/6.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">
@@ -234,7 +234,7 @@ export default function Discover() {
             </div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/7.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">
@@ -262,7 +262,7 @@ export default function Discover() {
             </div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/8.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">
@@ -290,7 +290,7 @@ export default function Discover() {
             </div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/9.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">
@@ -318,7 +318,7 @@ export default function Discover() {
             </div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/10.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">
@@ -348,7 +348,7 @@ export default function Discover() {
         </div>
         <div className="self-stretch h-full justify-start   items-center gap-[21.03px] inline-flex">
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/11.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">
@@ -376,7 +376,7 @@ export default function Discover() {
             </div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/12.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">
@@ -404,7 +404,7 @@ export default function Discover() {
             </div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/13.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">
@@ -432,7 +432,7 @@ export default function Discover() {
             </div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/14.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">
@@ -460,7 +460,7 @@ export default function Discover() {
             </div>
           </div>
           <div className="grow shrink basis-0 flex-col justify-start items-start gap-[13.44px] inline-flex">
-            <div className="self-stretch h-[266.81px] bg-[#707070] rounded-[10.56px]" />
+            <div className="self-stretch h-[266.81px] bg-[url(src/assets/15.png)] bg-cover bg-no-repeat bg-center rounded-[10.56px]" />
             <div className="self-stretch h-[112.39px] flex-col justify-start items-start gap-[18.24px] flex">
               <div className="self-stretch h-[75.16px] flex-col justify-start items-start gap-[8.64px] flex">
                 <div className="self-stretch text-[#ffffff]/70 text-[13.44px] font-[300] font-['Inter'] leading-none tracking-tight">

@@ -1,4 +1,4 @@
-import { createPublicClient, http, type Log } from 'viem';
+import { createPublicClient, http, type Log } from 'node_modules/viem';
 import { sepolia } from 'viem/chains';
 
 const contractAddress = '0xbf178ba1bfce96d4de31c4df18e05f0ae0192be8';
