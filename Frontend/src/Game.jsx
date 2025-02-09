@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ethers } from "ethers";
 
 // Replace with your contract address and ABI
-const contractAddress = "0x9b93a55a4251ae97ca262e54f6c7ddef8cf1fc70";
+const contractAddress = "0x3365d8490f58a1df522936abd137161d5e648055";
 const contractABI = [
   "function init() external",
   "function bet(uint256 value) external payable",

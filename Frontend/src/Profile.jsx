@@ -3,11 +3,59 @@ import React,{useState} from "react";
 import WalletConnect from "./WalletConnect";
 import Popup from "./Popup";
 import { createPortal } from "react-dom";
-import Claims from "./Claims";
+import { ethers } from "ethers";
+
+// Contract configuration
+const CONTRACT_ADDRESS = "0x3365d8490f58a1df522936abd137161d5e648055"; // Replace with your contract address
+const contractABI = [
+  "function init() external",
+  "function bet(uint256 value) external payable",
+  "function closeRegistration() external",
+  "function claimPrize() external"
+];
 
 export default function Profile() {
    const [isOpen, setIsOpen] = useState(false);
    const [isOpen2, setIsOpen2] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
+
+   const handleClaim = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Check if MetaMask is installed
+      if (!window.ethereum) {
+        alert("Please install MetaMask to claim prizes!");
+        return;
+      }
+
+      // Request account access
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      
+      // Create a Web3Provider instance
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      
+      // Get the signer
+      const signer = provider.getSigner();
+      
+      // Create contract instance
+      const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, signer);
+      
+      // Call the claimPrize function
+      const tx = await contract.claimPrize();
+      
+      // Wait for transaction to be mined
+      await tx.wait();
+      
+      alert("Prize claimed successfully!");
+    } catch (error) {
+      console.error("Error claiming prize:", error);
+      alert("Failed to claim prize. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="h-[1022.81px] flex-col justify-start items-start gap-2.5 inline-flex">
       <div className="self-stretch h-[1022.81px] flex-col justify-start items-start gap-[60px] flex">
@@ -39,16 +87,16 @@ export default function Profile() {
 
 
       <button
-             onClick={() => setIsOpen(true)}
-             className="w-[120px] h-[41.345px] px-[0.96px] bg-[#ffffff] rounded-[10.52px] justify-center items-center gap-[9.40px] border-0 inline-flex  transition-colors delay-50 duration-50 ease-in-out "
-           >
-             <div className="justify-start items-center flex">
-    
-     <div className="w-[90.14px] text-center text-[#000000]/80  text-[15.03px] font-medium font-['Inter']">
-       Claims
-     </div>
-     </div>
-           </button>
+        onClick={handleClaim}
+        disabled={isLoading}
+        className="w-[120px] h-[41.345px] px-[0.96px] bg-[#ffffff] rounded-[10.52px] justify-center items-center gap-[9.40px] border-0 inline-flex transition-colors delay-50 duration-50 ease-in-out disabled:opacity-50"
+      >
+        <div className="justify-start items-center flex">
+          <div className="w-[90.14px] text-center text-[#000000]/80 text-[15.03px] font-medium font-['Inter']">
+            {isLoading ? "Claiming..." : "Claim Prize"}
+          </div>
+        </div>
+      </button>
      
 
         
