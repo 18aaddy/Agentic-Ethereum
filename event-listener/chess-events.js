@@ -4,7 +4,7 @@ import * as abiModule from './abi.json' assert { type: 'json' };
 import ChessApiClient from './api.js';
 
 const abi = abiModule.default;
-const contractAddress = '0x00D30c054CcC785Bf826E2f31168e82e15bec4dC';
+const contractAddress = '0x207D7Ad5e15567ccA81a5E308FbA0c4AF6fA4Ea4';
 const chessApi = new ChessApiClient();
 
 
