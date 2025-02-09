@@ -20,6 +20,7 @@ import { getCurrentTurn, getCurrentTurnInput } from "./custom-tools/currentTurn"
 import { getGameStarted, getGameStartedInput } from "./custom-tools/gameStarted";
 import { getGameOver, getGameOverInput } from "./custom-tools/gameOver";
 import { getBoard, getBoardInput } from "./custom-tools/board";
+import { pickRunnableConfigKeys } from "@langchain/core/runnables";
 //import { primaryChain } from "@wardenprotocol/warden-agent-kit-core/typescript/src/utils/chains.ts";
 
 dotenv.config();
@@ -34,8 +35,10 @@ async function initializeAgent() {
         // Initialize LLM
         const llm = new ChatOpenAI({
             model: "gpt-4o-mini",
+            //temperature: 0,
+            
         });
-
+   
         // const llm = new ChatOpenAI(
         //     {
         //         modelName: "google/gemini-2.0-flash-exp:free",
@@ -69,7 +72,6 @@ async function initializeAgent() {
                 (process.env.PRIVATE_KEY as `0x${string}`) || undefined,
         };
 
-        // Initialize Warden Agent Kit
         const agentkit = new WardenAgentKit(config);
 
         // Initialize Warden Agent Kit Toolkit and get tools
@@ -97,13 +99,6 @@ async function initializeAgent() {
             function :resignGame,
         },agentkit);
 
-        // const initializeBoardTool = new WardenTool({
-        //     name: "initialze_board",
-        //     description: "This tool should be called when a user wants to initialise a new board",
-        //     schema: joinGameInput, // there arent any inputs to the function to be called so no schema 
-        //     function :joinGame,
-        // },agentkit);
-
         const getBlackPlayerTool = new WardenTool({
             name: "black-player",
             description: "This tool should be called when a user wants to query the address of the blackPlayer. To check if i am the blackPlayer compare my address with that of the blackPlayer, if it matches then i am the blackPlayer otherwise i am the whitePlayer",
@@ -120,7 +115,7 @@ async function initializeAgent() {
 
         const getCurrentTurnTool = new WardenTool({
             name: "current-turn",
-            description: "This tool should be called when a user wants to query the current turn, if the retured value is 1 then it is the turn of the whitePlayer, otherwise if 0 is returned then it is the turn of the blackPlayer. to know if it is your turn check your address with that of the blackPlayer's address and the whitePlayer's address. Your color will be the one which matches with your address",
+            description: "This tool should be called when a user wants to query the current turn, if the retured value is 1 then it is the turn of the whitePlayer, otherwise if 2 is returned then it is the turn of the blackPlayer. to know if it is your turn check your address with that of the blackPlayer's address and the whitePlayer's address. Your color will be the one which matches with your address",
             schema: getCurrentTurnInput, // No input required
             function: getCurrentTurn,
         }, agentkit);
@@ -139,10 +134,10 @@ async function initializeAgent() {
         }, agentkit);
 
         const getBoardTileStatusTool = new WardenTool({
-            name: "game-over",
+            name: "board",
             description: "This tool should be called when a user wants to query the pieceType, color of that piece and if the piece has moved and a particular tile on the chess board with the coordinates (x,y) where x and y are to be given as the input for the file.",
-            schema: getGameOverInput, // No input required
-            function: getGameOver,
+            schema: getBoardInput, // No input required
+            function: getBoard,
         }, agentkit);
         
         tools.push(joinGameTool,makeMoveTool,resignGameTool,getBlackPlayerTool, getWhitePlayerTool, getCurrentTurnTool, getGameStartedTool, getGameOverTool, getBoardTileStatusTool);
@@ -150,19 +145,36 @@ async function initializeAgent() {
         // Store buffered conversation history in memory
         const memory = new MemorySaver();
         const agentConfig = {
-            configurable: { thread_id: "Warden Agent Kit CLI Agent Example!" },
+            configurable: { thread_id: "Warden Agent Kit CLI Agent Example!",
+             // pickRunnableConfigKeys
+            },
         };
 
         
-        // Create React Agent using the LLM and Warden Agent Kit tools
+        
+      
         const agent = createReactAgent({
             llm,
             tools,
             checkpointSaver: memory,
             messageModifier:
-                "You're a helpful assistant that can help with a variety of tasks related to web3 tranactions." +
-                "You should only use the provided tools to carry out tasks, interperate the users input" +
-                "and select the correct tool to use for the required tasks or tasks.",
+                "You're an AI agent responsible for playing a game of chess. " +
+        "You should only use the provided tools to perform actions related to chess. " +
+        "Here are the tasks you can perform:\n" +
+        "1. Use the 'join_game' tool when the game hasn't started, and you need to join.\n" +
+        "2. To determine which player you are (black or white), use the 'white-player' and 'black-player' tools to query the addresses of the players. " +
+        "Compare the addresses with your own to know if you're the white or black player. You must remember your color throughout the game.\n" +
+        "3. Always check whose turn it is by using the 'current-turn' tool. If it returns 1, it’s the white player’s turn, and if it returns 2, it’s the black player’s turn. " +
+        "You should only make a move when it's your turn, based on your color. If it's not your turn, wait.\n" +
+        "4. When it is your turn, use the 'make_move' tool to move a piece by specifying the initial and final coordinates of the piece carefully, after thinking about the best possible move.\n" +
+        "5. If the player wants to resign from the game, use the 'resign_game' tool.\n" +
+        "6. Use the 'game-started' tool to check if the game is active and the 'game-over' tool to check if the game has ended.\n" +
+        "7. Use the 'board' tool to query the status of a specific tile on the board, such as the type of piece on the tile and whether it has moved.\n" +
+        "You should carefully determine the correct action or series of actions, and select the appropriate tool to proceed. " +
+        "Your goal is to efficiently play the game, follow the rules of chess, and make strategic moves. Only make a move when it’s your turn based on your assigned color, " +
+        "and always check whose turn it is before playing. Remember your color throughout the game after querying the player addresses."+
+        "you are not allowed to create a new space or a new key, use the existing ones itself"
+            
         });
 
         return { agent, config: agentConfig };
@@ -182,25 +194,53 @@ async function initializeAgent() {
    * @param interval - Time interval between actions in seconds
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async function runAutonomousMode(agent: any, config: any, interval = 10) {
+  async function runAutonomousMode(agent: any, config: any, interval = 20) {
     console.log("Starting autonomous mode...");
   
     // eslint-disable-next-line no-constant-condition
     while (true) {
       try {
+        
         const thought = 
-        "You are an AI agent playing a game of chess. " +
-        "Your primary goal is to play strategically and make the best possible moves. " +
-        "If the game hasn't started, join it first. The game begins when the other player joins. " +
-        "You can check if the game has started using the 'gameStarted' function. " +
-        "Once the game is active, analyze the board and make strategic moves using the 'makeMove' function. " +
-        "You can query the board's state, check whose turn it is, and see the players' addresses through viewing functions. " +
-        "when you are waiting for other player to move wait 15 seconds before querrying the board's states "
-        "If the situation becomes hopeless, you have the option to resign, but aim to play skillfully. " +
-        "Ensure you choose the best action for each turn, considering both the current board state and potential future moves. " +
-        "You can check if the game has ended using the 'gameOver' function. " +
-        "Available actions include: joining the game, making a move, and resigning.";
-  
+    "You are an AI agent playing a game of chess. " +
+    
+        "Your first action is to join the game, and when the transaction succeeds, you must determine whether you are the white or black player. " +
+        "To do this, query the addresses of both the white player and the black player, then compare them to your owner's address. " +
+        "Whichever address matches your owner's address, that is the color you will be playing as. " +
+        "Once you know your color (white or black), you must remember this throughout the entire game. " +
+        "You should not query which player you are again during the game; this needs to be remembered and never queried after the initial determination. " +
+
+        "After successfully joining the game, every 10 seconds, you must query the 'gameStarted' function to check if the other player has joined. " +
+        "If 'gameStarted' returns false, it means the other player has not joined yet, you should query the value of gameStarted again after 20 seconds and see if the game has started " +
+        "Do not attempt to make any moves or proceed with the game until 'gameStarted' becomes true. " +
+        "Once 'gameStarted' returns true, that means the other player has joined the game, and you can proceed with determining whose turn it is. " +
+
+        "Once you know your color (white or black), play your move when it's your turn. " +
+        "You can determine whose turn it is by querying the 'currentTurn' value. " +
+        "If the value of 'currentTurn' is 1, it is the white player's turn, and if it's 2, it is the black player's turn. " +
+        "If the 'currentTurn' value matches your color (1 for white or 2 for black), proceed to play your move by evaluating the board and making a strategic decision. " +
+        "However, if it's not your turn, wait for the other player to make their move. " +
+
+        "Before playing your move, you must query the state of the board to understand the positions of all pieces. " +
+        "By analyzing the board's state, you can determine which pieces belong to you and the opponent and calculate the best possible move to make. " +
+        "Make sure your move is valid according to the rules of chess and maximizes your chances of winning. " +
+
+        "Once you have queried the board state, you must remember the current state of the board. " +
+        "After making your move, you must update the remembered board state to reflect the new positions of the pieces. " +
+        "This will help you track the game's progress without having to query the board state repeatedly during the game. " +
+
+        "You must continuously query the value of 'currentTurn' every 10 seconds to check if it's your turn. " +
+        "If it's your turn, query the state of the board, analyze it, and play your move by selecting a piece and making a valid move. " +
+        "After making your move, update the remembered state of the board based on the changes. " +
+        "If it's not your turn, you must wait patiently for the other player to finish their move before making yours. " +
+
+        "Additionally, if at any point during the game you feel that you cannot win, or you no longer want to continue playing, you have the option to resign. " +
+        "If you choose to resign, you can forfeit the game, ending it immediately. " +
+
+        "Remember, your primary objective is to play strategically and win the game by making smart moves when it's your turn. " +
+        "You are responsible for checking the game state, verifying whose turn it is, analyzing the board, and making valid moves at the appropriate time.";
+
+        
         const stream = await agent.stream({ messages: [new HumanMessage(thought)] }, config);
   
         for await (const chunk of stream) {
@@ -221,7 +261,7 @@ async function initializeAgent() {
       }
     }
   }
-  
+
 
 async function runChatMode(agent: any, config: any) {
     console.log("Starting chat mode... Type 'exit' to end.");
