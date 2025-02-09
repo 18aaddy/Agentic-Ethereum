@@ -20,7 +20,6 @@ import { getCurrentTurn, getCurrentTurnInput } from "./custom-tools/currentTurn"
 import { getGameStarted, getGameStartedInput } from "./custom-tools/gameStarted";
 import { getGameOver, getGameOverInput } from "./custom-tools/gameOver";
 import { getBoard, getBoardInput } from "./custom-tools/board";
-import { pickRunnableConfigKeys } from "@langchain/core/runnables";
 //import { primaryChain } from "@wardenprotocol/warden-agent-kit-core/typescript/src/utils/chains.ts";
 
 dotenv.config();
@@ -30,188 +29,303 @@ dotenv.config();
  *
  * @returns Agent executor and config
  */
-async function initializeAgent() {
-    try {
-        // Initialize LLM
-        const llm = new ChatOpenAI({
-            model: "gpt-4o-mini",
-            //temperature: 0,
-            
-        });
-   
-        // const llm = new ChatOpenAI(
-        //     {
-        //         modelName: "google/gemini-2.0-flash-exp:free",
-        //         openAIApiKey: process.env.OPENROUTER_API_KEY,
-        //     },
-        //     {
-        //         basePath: "https://openrouter.ai/api/v1",
-        //     }
-        // );
+// async function initializeAgent() {
+//     try {
+//         // Initialize LLM
+//         const llm = new ChatOpenAI({
+//             model: "gpt-4o-mini",
+//         });
 
-        // const llm = new ChatOllama({
+//         // const llm = new ChatOpenAI(
+//         //     {
+//         //         modelName: "google/gemini-2.0-flash-exp:free",
+//         //         openAIApiKey: process.env.OPENROUTER_API_KEY,
+//         //     },
+//         //     {
+//         //         basePath: "https://openrouter.ai/api/v1",
+//         //     }
+//         // );
+
+//         // const llm = new ChatOllama({
+//         //     model: "llama-3.2-3b",
+//         //     temperature: 0,
+//         //     maxRetries: 2,
+//         //     baseUrl: "https://ai.devnet.wardenprotocol.org/openai/v1",
+//         // });
+
+//         // const llm = new ChatOpenAI({
+//         //     modelName: "llama-3.1-8b-instruct-fp8-l4",
+//         //     temperature: 0,
+//         //     maxRetries: 2,
+//         //     apiKey: "thisIsIgnored",
+//         //     configuration: {
+//         //         baseURL: "https://ai.devnet.wardenprotocol.org/openai/v1",
+//         //     },
+//         // });
+
+//         // Configure Warden Agent Kit
+//         const config = {
+//             privateKeyOrAccount:
+//                 (process.env.PRIVATE_KEY as `0x${string}`) || undefined,
+//         };
+
+//         // Initialize Warden Agent Kit
+//         const agentkit = new WardenAgentKit(config);
+
+//         // Initialize Warden Agent Kit Toolkit and get tools
+//         const wardenToolkit = new WardenToolkit(agentkit);
+//         const tools = wardenToolkit.getTools();
+
+//         const joinGameTool = new WardenTool({
+//             name: "join_game",
+//             description: "This tool should be called when a user wants to join the game of chess",
+//             schema: joinGameInput, // there arent any inputs to the function to be called so no schema 
+//             function :joinGame,
+//         },agentkit);
+        
+//         const makeMoveTool = new WardenTool({
+//             name: "make_move",
+//             description: "This tool should be called when a user wants to make a move, for that he needs to give the initial x and y coordinates which are the from coordinates of the piece and also the final x and y coordinates which are the to coordinates  to which the piece is to be moved ",
+//             schema: makeMoveInput, // there arent any inputs to the function to be called so no schema 
+//             function :makeMove,
+//         },agentkit);
+        
+//         const resignGameTool = new WardenTool({
+//             name: "resign_game",
+//             description: "This tool should be called when a user wants to resign from the game",
+//             schema: resignGameInput, // there arent any inputs to the function to be called so no schema 
+//             function :resignGame,
+//         },agentkit);
+
+//         // const initializeBoardTool = new WardenTool({
+//         //     name: "initialze_board",
+//         //     description: "This tool should be called when a user wants to initialise a new board",
+//         //     schema: joinGameInput, // there arent any inputs to the function to be called so no schema 
+//         //     function :joinGame,
+//         // },agentkit);
+
+//         const getBlackPlayerTool = new WardenTool({
+//             name: "black-player",
+//             description: "This tool should be called when a user wants to query the address of the blackPlayer. To check if i am the blackPlayer compare my address with that of the blackPlayer, if it matches then i am the blackPlayer otherwise i am the whitePlayer",
+//             schema: getBlackPlayerInput, // there arent any inputs to the function to be called so no schema 
+//             function :getBlackPlayer,
+//         },agentkit);
+
+//         const getWhitePlayerTool = new WardenTool({
+//             name: "white-player",
+//             description: "This tool should be called when a user wants to query the address of the whitePlayer. To check if i am the whitePlayer compare my address with that of the whitePlayer, if it matches then i am the whitePlayer otherwise i am the blackPlayer",
+//             schema: getWhitePlayerInput, // there arent any inputs to the function to be called so no schema 
+//             function :getWhitePlayer,
+//         },agentkit);
+
+//         const getCurrentTurnTool = new WardenTool({
+//             name: "current-turn",
+//             description: "This tool should be called when a user wants to query the current turn, if the retured value is 1 then it is the turn of the whitePlayer, otherwise if 0 is returned then it is the turn of the blackPlayer. to know if it is your turn check your address with that of the blackPlayer's address and the whitePlayer's address. Your color will be the one which matches with your address",
+//             schema: getCurrentTurnInput, // No input required
+//             function: getCurrentTurn,
+//         }, agentkit);
+//         const getGameStartedTool = new WardenTool({
+//             name: "game-started",
+//             description: "This tool should be called when a user wants to know if the game is active or not, if true is returned then the game is active and you can make a move if it is your turn",
+//             schema: getGameStartedInput, // No input required
+//             function: getGameStarted,
+//         }, agentkit);
+
+//         const getGameOverTool = new WardenTool({
+//             name: "game-over",
+//             description: "This tool should be called when a user wants to know if the game is still active or it has ended, if true is returned then the game is over and you first need to join the game in order to play it",
+//             schema: getGameOverInput, // No input required
+//             function: getGameOver,
+//         }, agentkit);
+
+//         const getBoardTileStatusTool = new WardenTool({
+//             name: "game-over",
+//             description: "This tool should be called when a user wants to query the pieceType, color of that piece and if the piece has moved and a particular tile on the chess board with the coordinates (x,y) where x and y are to be given as the input for the file.",
+//             schema: getGameOverInput, // No input required
+//             function: getGameOver,
+//         }, agentkit);
+        
+//         tools.push(joinGameTool,makeMoveTool,resignGameTool,getBlackPlayerTool, getWhitePlayerTool, getCurrentTurnTool, getGameStartedTool, getGameOverTool, getBoardTileStatusTool);
+
+//         // Store buffered conversation history in memory
+//         const memory = new MemorySaver();
+//         const agentConfig = {
+//             configurable: { thread_id: "Warden Agent Kit CLI Agent Example!" },
+//         };
+
+        
+//         // Create React Agent using the LLM and Warden Agent Kit tools
+//         const agent = createReactAgent({
+//             llm,
+//             tools,
+//             checkpointSaver: memory,
+//             messageModifier:
+//                 "You're a helpful assistant that can help with a variety of tasks related to web3 tranactions." +
+//                 "You should only use the provided tools to carry out tasks, interperate the users input" +
+//                 "and select the correct tool to use for the required tasks or tasks.",
+//         });
+
+//         return { agent, config: agentConfig };
+//     } catch (error) {
+//         console.error("Failed to initialize agent:", error);
+//         throw error; // Re-throw to be handled by caller
+//     }
+// }
+// agent initialised till here 
+
+export async function initializeAgent(modelName: string, apiKey: string) {
+  try {
+    // Initialize LLM based on user selection
+    let llm;
+    switch (modelName.toLowerCase()) {
+      case 'gpt-4o-mini':
+        llm = new ChatOpenAI({
+          model: "gpt-4o-mini",
+          openAIApiKey: apiKey
+        });
+        break;
+
+      case 'gemini':
+        llm = new ChatOpenAI({
+          modelName: "google/gemini-2.0-flash-exp:free",
+          openAIApiKey: apiKey
+        }, {
+          basePath: "https://openrouter.ai/api/v1"
+        });
+        break;
+
+        // case 'ollama':
+        //   llm = new ChatOllama({
         //     model: "llama-3.2-3b",
         //     temperature: 0,
         //     maxRetries: 2,
-        //     baseUrl: "https://ai.devnet.wardenprotocol.org/openai/v1",
-        // });
+        //     baseUrl: "https://ai.devnet.wardenprotocol.org/openai/v1"
+        //   });
+        break;
 
-        // const llm = new ChatOpenAI({
-        //     modelName: "llama-3.1-8b-instruct-fp8-l4",
-        //     temperature: 0,
-        //     maxRetries: 2,
-        //     apiKey: "thisIsIgnored",
-        //     configuration: {
-        //         baseURL: "https://ai.devnet.wardenprotocol.org/openai/v1",
-        //     },
-        // });
-
-        // Configure Warden Agent Kit
-        const config = {
-            privateKeyOrAccount:
-                (process.env.PRIVATE_KEY as `0x${string}`) || undefined,
-        };
-
-        const agentkit = new WardenAgentKit(config);
-
-        // Initialize Warden Agent Kit Toolkit and get tools
-        const wardenToolkit = new WardenToolkit(agentkit);
-        const tools = wardenToolkit.getTools();
-
-        const joinGameTool = new WardenTool({
-            name: "join_game",
-            description: "This tool should be called when a user wants to join the game of chess",
-            schema: joinGameInput, // there arent any inputs to the function to be called so no schema 
-            function :joinGame,
-        },agentkit);
-        
-        const makeMoveTool = new WardenTool({
-            name: "make_move",
-            description: "This tool should be called when a user wants to make a move, for that he needs to give the initial x and y coordinates which are the from coordinates of the piece and also the final x and y coordinates which are the to coordinates  to which the piece is to be moved ",
-            schema: makeMoveInput, // there arent any inputs to the function to be called so no schema 
-            function :makeMove,
-        },agentkit);
-        
-        const resignGameTool = new WardenTool({
-            name: "resign_game",
-            description: "This tool should be called when a user wants to resign from the game",
-            schema: resignGameInput, // there arent any inputs to the function to be called so no schema 
-            function :resignGame,
-        },agentkit);
-
-        const getBlackPlayerTool = new WardenTool({
-            name: "black-player",
-            description: "This tool should be called when a user wants to query the address of the blackPlayer. To check if i am the blackPlayer compare my address with that of the blackPlayer, if it matches then i am the blackPlayer otherwise i am the whitePlayer",
-            schema: getBlackPlayerInput, // there arent any inputs to the function to be called so no schema 
-            function :getBlackPlayer,
-        },agentkit);
-
-        const getWhitePlayerTool = new WardenTool({
-            name: "white-player",
-            description: "This tool should be called when a user wants to query the address of the whitePlayer. To check if i am the whitePlayer compare my address with that of the whitePlayer, if it matches then i am the whitePlayer otherwise i am the blackPlayer",
-            schema: getWhitePlayerInput, // there arent any inputs to the function to be called so no schema 
-            function :getWhitePlayer,
-        },agentkit);
-
-        const getCurrentTurnTool = new WardenTool({
-            name: "current-turn",
-            description: "This tool should be called when a user wants to query the current turn, if the retured value is 1 then it is the turn of the whitePlayer, otherwise if 2 is returned then it is the turn of the blackPlayer. to know if it is your turn check your address with that of the blackPlayer's address and the whitePlayer's address. Your color will be the one which matches with your address",
-            schema: getCurrentTurnInput, // No input required
-            function: getCurrentTurn,
-        }, agentkit);
-        const getGameStartedTool = new WardenTool({
-            name: "game-started",
-            description: "This tool should be called when a user wants to know if the game is active or not, if true is returned then the game is active and you can make a move if it is your turn",
-            schema: getGameStartedInput, // No input required
-            function: getGameStarted,
-        }, agentkit);
-
-        const getGameOverTool = new WardenTool({
-            name: "game-over",
-            description: "This tool should be called when a user wants to know if the game is still active or it has ended, if true is returned then the game is over and you first need to join the game in order to play it",
-            schema: getGameOverInput, // No input required
-            function: getGameOver,
-        }, agentkit);
-
-        const getBoardTileStatusTool = new WardenTool({
-            name: "board",
-            description: "This tool should be called when a user wants to query the pieceType, color of that piece and if the piece has moved and a particular tile on the chess board with the coordinates (x,y) where x and y are to be given as the input for the file.",
-            schema: getBoardInput, // No input required
-            function: getBoard,
-        }, agentkit);
-        
-        tools.push(joinGameTool,makeMoveTool,resignGameTool,getBlackPlayerTool, getWhitePlayerTool, getCurrentTurnTool, getGameStartedTool, getGameOverTool, getBoardTileStatusTool);
-
-        // Store buffered conversation history in memory
-        const memory = new MemorySaver();
-        const agentConfig = {
-            configurable: { thread_id: "Warden Agent Kit CLI Agent Example!",
-             // pickRunnableConfigKeys
-            },
-        };
-
-        
-        
-      
-        const agent = createReactAgent({
-            llm,
-            tools,
-            checkpointSaver: memory,
-            messageModifier:
-                "You're an AI agent responsible for playing a game of chess. " +
-"You should only use the provided tools to perform actions related to chess. " +
-"Here are the tasks you can perform:\n" +
-
-"1. Your first action is to join the game. Use the 'join_game' tool when the game hasn't started, and you need to join. " +
-"When the transaction succeeds, you must determine whether you are the white or black player. " +
-"To do this, query the addresses of both the white player and the black player using the 'white-player' and 'black-player' tools, " +
-"then compare them to your owner's address. Whichever address matches your owner's address, that is the color you will be playing as. " +
-"You must remember your color (white or black) throughout the entire game and never query which player you are again.\n" +
-
-"2. After joining, continuously query the 'game-started' tool every 10 seconds to check if the other player has joined. " +
-"If 'game-started' returns false, it means the other player hasn't joined yet. Query again after 20 seconds and see if the game has started. " +
-"Do not attempt to make any moves or proceed until 'game-started' returns true, meaning the game is active.\n" +
-
-"3. Always check whose turn it is by using the 'current-turn' tool. If it returns 1, it’s the white player’s turn, and if it returns 2, it’s the black player’s turn. " +
-"You should only make a move when it's your turn based on your color. If the 'current-turn' value matches your color (1 for white or 2 for black), " +
-"proceed to play your move by evaluating the board and making a strategic decision. However, if it's not your turn, wait for the other player to make their move.\n" +
-
-"4. Before making your move, use the 'board' tool to query the state of the board to understand the positions of all pieces. " +
-"Analyze the board’s state to determine which pieces belong to you and your opponent, then calculate the best possible move. " +
-"Make sure your move is valid according to the rules of chess and maximizes your chances of winning. " +
-"After making your move, update the remembered board state to reflect the new positions of the pieces. " +
-"This will help you track the game's progress without having to query the board repeatedly during the game.\n" +
-
-"5. Once you know your color, play your move when it’s your turn. " +
-"Use the 'make_move' tool to move a piece by specifying the initial and final coordinates of the piece carefully after thinking about the best possible move. " +
-"Make sure to check whose turn it is before playing.\n" +
-
-"6. You must continuously query the 'current-turn' value every 10 seconds to check if it’s your turn. " +
-"If it’s not your turn, you must wait patiently for the other player to finish their move before making yours.\n" +
-
-"7. If you want to resign from the game, use the 'resign_game' tool to forfeit and end the game immediately.\n" +
-
-"8. Use the 'game-over' tool to check if the game has ended.\n" +
-
-"9. Your primary objective is to play strategically and win the game by making smart moves when it’s your turn. " +
-"You're responsible for checking the game state, verifying whose turn it is, analyzing the board, and making valid moves at the appropriate time.\n" +
-
-"You should carefully determine the correct action or series of actions and select the appropriate tool to proceed. " +
-"Your goal is to efficiently play the game, follow the rules of chess, and make strategic moves. " +
-"You are not allowed to create a new space or key; use only the existing ones."
-
-            
+      case 'llama-3.1-8b':
+        llm = new ChatOpenAI({
+          modelName: "llama-3.1-8b-instruct-fp8-l4",
+          temperature: 0,
+          maxRetries: 2,
+          apiKey: "thisIsIgnored", // API key not required for this endpoint
+          configuration: {
+            baseURL: "https://ai.devnet.wardenprotocol.org/openai/v1"
+          }
         });
+        break;
 
-        return { agent, config: agentConfig };
-    } catch (error) {
-        console.error("Failed to initialize agent:", error);
-        throw error; // Re-throw to be handled by caller
+      default:
+        throw new Error(`Unsupported model: ${modelName}`);
     }
+    const config = {
+      privateKeyOrAccount:
+        (process.env.PRIVATE_KEY as `0x${string}`) || undefined,
+    };
+    const agentkit = new WardenAgentKit(config);
+    const wardenToolkit = new WardenToolkit(agentkit);
+    const tools = wardenToolkit.getTools();
+    // Rest of the original initialization logic remains the same
+    const joinGameTool = new WardenTool({
+      name: "join_game",
+      description: "This tool should be called when a user wants to join the game of chess",
+      schema: joinGameInput, // there arent any inputs to the function to be called so no schema 
+      function: joinGame,
+    }, agentkit);
+
+    const makeMoveTool = new WardenTool({
+      name: "make_move",
+      description: "This tool should be called when a user wants to make a move, for that he needs to give the initial x and y coordinates which are the from coordinates of the piece and also the final x and y coordinates which are the to coordinates  to which the piece is to be moved ",
+      schema: makeMoveInput, // there arent any inputs to the function to be called so no schema 
+      function: makeMove,
+    }, agentkit);
+
+    const resignGameTool = new WardenTool({
+      name: "resign_game",
+      description: "This tool should be called when a user wants to resign from the game",
+      schema: resignGameInput, // there arent any inputs to the function to be called so no schema 
+      function: resignGame,
+    }, agentkit);
+
+    // const initializeBoardTool = new WardenTool({
+    //     name: "initialze_board",
+    //     description: "This tool should be called when a user wants to initialise a new board",
+    //     schema: joinGameInput, // there arent any inputs to the function to be called so no schema 
+    //     function :joinGame,
+    // },agentkit);
+
+    const getBlackPlayerTool = new WardenTool({
+      name: "black-player",
+      description: "This tool should be called when a user wants to query the address of the blackPlayer. To check if i am the blackPlayer compare my address with that of the blackPlayer, if it matches then i am the blackPlayer otherwise i am the whitePlayer",
+      schema: getBlackPlayerInput, // there arent any inputs to the function to be called so no schema 
+      function: getBlackPlayer,
+    }, agentkit);
+
+    const getWhitePlayerTool = new WardenTool({
+      name: "white-player",
+      description: "This tool should be called when a user wants to query the address of the whitePlayer. To check if i am the whitePlayer compare my address with that of the whitePlayer, if it matches then i am the whitePlayer otherwise i am the blackPlayer",
+      schema: getWhitePlayerInput, // there arent any inputs to the function to be called so no schema 
+      function: getWhitePlayer,
+    }, agentkit);
+
+    const getCurrentTurnTool = new WardenTool({
+      name: "current-turn",
+      description: "This tool should be called when a user wants to query the current turn, if the retured value is 1 then it is the turn of the whitePlayer, otherwise if 0 is returned then it is the turn of the blackPlayer. to know if it is your turn check your address with that of the blackPlayer's address and the whitePlayer's address. Your color will be the one which matches with your address",
+      schema: getCurrentTurnInput, // No input required
+      function: getCurrentTurn,
+    }, agentkit);
+    const getGameStartedTool = new WardenTool({
+      name: "game-started",
+      description: "This tool should be called when a user wants to know if the game is active or not, if true is returned then the game is active and you can make a move if it is your turn",
+      schema: getGameStartedInput, // No input required
+      function: getGameStarted,
+    }, agentkit);
+
+    const getGameOverTool = new WardenTool({
+      name: "game-over",
+      description: "This tool should be called when a user wants to know if the game is still active or it has ended, if true is returned then the game is over and you first need to join the game in order to play it",
+      schema: getGameOverInput, // No input required
+      function: getGameOver,
+    }, agentkit);
+
+    const getBoardTileStatusTool = new WardenTool({
+      name: "game-over",
+      description: "This tool should be called when a user wants to query the pieceType, color of that piece and if the piece has moved and a particular tile on the chess board with the coordinates (x,y) where x and y are to be given as the input for the file.",
+      schema: getGameOverInput, // No input required
+      function: getGameOver,
+    }, agentkit);
+
+    tools.push(joinGameTool, makeMoveTool, resignGameTool, getBlackPlayerTool, getWhitePlayerTool, getCurrentTurnTool, getGameStartedTool, getGameOverTool, getBoardTileStatusTool);
+
+    // Store buffered conversation history in memory
+    const memory = new MemorySaver();
+    const agentConfig = {
+      configurable: { thread_id: "Warden Agent Kit CLI Agent Example!" },
+    };
+
+
+    // Create React Agent using the LLM and Warden Agent Kit tools
+    const agent = createReactAgent({
+      llm,
+      tools,
+      checkpointSaver: memory,
+      messageModifier:
+        "You're a helpful assistant that can help with a variety of tasks related to web3 tranactions." +
+        "You should only use the provided tools to carry out tasks, interperate the users input" +
+        "and select the correct tool to use for the required tasks or tasks.",
+    });
+
+
+
+
+    // ... rest of the tool initialization code ...
+
+    return { agent, config: agentConfig };
+  } catch (error) {
+    console.error("Failed to initialize agent:", error);
+    throw error;
+  }
 }
-// agent initialised till here 
-
-
   /**
    * Run the agent autonomously with specified intervals
    *
@@ -220,53 +334,25 @@ async function initializeAgent() {
    * @param interval - Time interval between actions in seconds
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async function runAutonomousMode(agent: any, config: any, interval = 20) {
+  export async function runAutonomousMode(agent: any, config: any, interval = 10) {
     console.log("Starting autonomous mode...");
   
     // eslint-disable-next-line no-constant-condition
     while (true) {
       try {
-        
         const thought = 
-    "You are an AI agent playing a game of chess. " + "Choose an action or set of actions and execute it";
-    
-        // "Your first action is to join the game, and when the transaction succeeds, you must determine whether you are the white or black player. " +
-        // "To do this, query the addresses of both the white player and the black player, then compare them to your owner's address. " +
-        // "Whichever address matches your owner's address, that is the color you will be playing as. " +
-        // "Once you know your color (white or black), you must remember this throughout the entire game. " +
-        // "You should not query which player you are again during the game; this needs to be remembered and never queried after the initial determination. " +
-
-        // "After successfully joining the game, every 10 seconds, you must query the 'gameStarted' function to check if the other player has joined. " +
-        // "If 'gameStarted' returns false, it means the other player has not joined yet, you should query the value of gameStarted again after 20 seconds and see if the game has started " +
-        // "Do not attempt to make any moves or proceed with the game until 'gameStarted' becomes true. " +
-        // "Once 'gameStarted' returns true, that means the other player has joined the game, and you can proceed with determining whose turn it is. " +
-
-        // "Once you know your color (white or black), play your move when it's your turn. " +
-        // "You can determine whose turn it is by querying the 'currentTurn' value. " +
-        // "If the value of 'currentTurn' is 1, it is the white player's turn, and if it's 2, it is the black player's turn. " +
-        // "If the 'currentTurn' value matches your color (1 for white or 2 for black), proceed to play your move by evaluating the board and making a strategic decision. " +
-        // "However, if it's not your turn, wait for the other player to make their move. " +
-
-        // "Before playing your move, you must query the state of the board to understand the positions of all pieces. " +
-        // "By analyzing the board's state, you can determine which pieces belong to you and the opponent and calculate the best possible move to make. " +
-        // "Make sure your move is valid according to the rules of chess and maximizes your chances of winning. " +
-
-        // "Once you have queried the board state, you must remember the current state of the board. " +
-        // "After making your move, you must update the remembered board state to reflect the new positions of the pieces. " +
-        // "This will help you track the game's progress without having to query the board state repeatedly during the game. " +
-
-        // "You must continuously query the value of 'currentTurn' every 10 seconds to check if it's your turn. " +
-        // "If it's your turn, query the state of the board, analyze it, and play your move by selecting a piece and making a valid move. " +
-        // "After making your move, update the remembered state of the board based on the changes. " +
-        // "If it's not your turn, you must wait patiently for the other player to finish their move before making yours. " +
-
-        // "Additionally, if at any point during the game you feel that you cannot win, or you no longer want to continue playing, you have the option to resign. " +
-        // "If you choose to resign, you can forfeit the game, ending it immediately. " +
-
-        // "Remember, your primary objective is to play strategically and win the game by making smart moves when it's your turn. " +
-        // "You are responsible for checking the game state, verifying whose turn it is, analyzing the board, and making valid moves at the appropriate time.";
-
-        
+        "You are an AI agent playing a game of chess. " +
+        "Your primary goal is to play strategically and make the best possible moves. " +
+        "If the game hasn't started, join it first. The game begins when the other player joins. " +
+        "You can check if the game has started using the 'gameStarted' function. " +
+        "Once the game is active, analyze the board and make strategic moves using the 'makeMove' function. " +
+        "You can query the board's state, check whose turn it is, and see the players' addresses through viewing functions. " +
+        "when you are waiting for other player to move wait 15 seconds before querrying the board's states "
+        "If the situation becomes hopeless, you have the option to resign, but aim to play skillfully. " +
+        "Ensure you choose the best action for each turn, considering both the current board state and potential future moves. " +
+        "You can check if the game has ended using the 'gameOver' function. " +
+        "Available actions include: joining the game, making a move, and resigning.";
+  
         const stream = await agent.stream({ messages: [new HumanMessage(thought)] }, config);
   
         for await (const chunk of stream) {
@@ -287,9 +373,9 @@ async function initializeAgent() {
       }
     }
   }
+  
 
-
-async function runChatMode(agent: any, config: any) {
+export async function runChatMode(agent: any, config: any) {
     console.log("Starting chat mode... Type 'exit' to end.");
 
     const rl = readline.createInterface({
@@ -374,7 +460,7 @@ async function runChatMode(agent: any, config: any) {
  */
 async function main() {
     try {
-        const { agent, config } = await initializeAgent();
+        const { agent, config } = await initializeAgent("gpt-4o-mini", process.env.OPENAI_API_KEY as string);
         const mode = await chooseMode();
        // await runChatMode(agent, config);
        if (mode === "chat") {
