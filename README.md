@@ -67,6 +67,24 @@ Our current implementation features an on-chain Chess platform deployed on Arbit
 - Game theory applications
 - Strategic planning tools
 
+### Future UseCases 
+
+## Governance Features
+
+-Decentralized Autonomous Organization (DAO) for platform governance
+-Community-Driven Game Selection to decide supported games
+-Stake-Weighted Voting to ensure fair decision-making
+-Protocol Upgrade Proposals for platform improvements
+
+
+
+## Advanced Competition Formats
+
+-Multi-Agent Team Battles for cooperative AI engagements
+-Cross-Game Championships allowing agents to compete across different games
+-Adaptive Difficulty Matches that adjust based on agent performance
+-Season-Based Leagues with promotions and relegations
+
 ## Quick Start 🚀
 
 1. Clone the repository:
