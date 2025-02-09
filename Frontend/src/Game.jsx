@@ -14,6 +14,28 @@ const contractABI = [
 ];
 
 export default function Game() {
+
+
+  const defaultColor = "#d9d9d9/5";
+  const changeCol = "#414141";
+
+  const [box1Color, setBox1Color] = useState(defaultColor);
+  const [box2Color, setBox2Color] = useState(defaultColor);
+
+  const changeColor = (box) => {
+    if (box === 1) {
+      setBox1Color(changeCol);
+      setBox2Color(defaultColor);
+    } else {
+      setBox2Color(changeCol);
+      setBox1Color(defaultColor);
+    }
+  };
+
+
+
+
+  
   const [txDone, setTxDone] = useState(false);
   const [isBetting, setIsBetting] = useState(false);
 
@@ -23,7 +45,7 @@ export default function Game() {
   useEffect(() => {
     if (location.pathname !== "/Game") return; // Start only when on /Game
 
-    setTimeLeft(30); // Reset timer when entering /Game
+    setTimeLeft(2000); // Reset timer when entering /Game
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
@@ -41,8 +63,7 @@ export default function Game() {
 
   const handleTimerEnd = () => {
     console.log("Timer ended!");
-    navigate(" "); // Navigate to ChessGame when timer ends
-    // Add any function logic here
+    window.location.href = "http://localhost:6960";
   };
 
 
@@ -127,7 +148,15 @@ export default function Game() {
 
 
   return (
+
+
+    
+
+
+
+    
     <div className="self-stretch h-[766.76px] w-full justify-start items-start gap-[43.55px] inline-flex">
+    
       <div className="grow shrink basis-0 h-[670.24px] flex-col justify-start items-start gap-[32.63px] inline-flex overflow-hidden">
         <div className="self-stretch h-[156.47px] flex-col justify-start items-start gap-[31.67px] flex">
           <div className="self-stretch h-[85.52px] flex-col justify-start items-start gap-[11.52px] flex">
@@ -166,12 +195,42 @@ export default function Game() {
             </div>
             <div className="flex-col justify-start items-start gap-[15.87px] flex">
               {/* Agent selection cards … */}
-              <div className="w-[362.81px] h-[94px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-start gap-2.5 flex">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <div
+        className="w-24 h-24 cursor-pointer rounded-[12.47px]  transition-colors"
+        style={{ backgroundColor: box2Color }}
+        onClick={() => changeColor(2)}
+      >
+              <div   className={`w-[362.81px] h-[94px]   bg-[#d9d9d9]/5  rounded-[12.47px] flex-col justify-center items-start gap-2.5 flex`}>
                 <div className="w-[227.47px] mx-[14px] h-[61.47px] justify-start items-center gap-[15.03px] inline-flex">
-                  <div className="w-[61.47px] h-[61.47px] bg-[#262628] rounded-full" />
+                  <div className="w-[61.47px] h-[61.47px]  bg-[url(src/assets/avatar/3.png)] bg-cover bg-no-repeat bg-center rounded-full" />
                   <div className="w-[157.77px] flex-col justify-start items-start gap-[5.63px] inline-flex">
                     <div className="self-stretch text-[#ffffff] text-[16.90px] font-semibold font-['Inter'] capitalize tracking-tight">
-                      nobita
+                    kakashi
                     </div>
                     <div className="self-stretch justify-start items-center gap-[9.39px] inline-flex">
                       <div className="text-[#ffffff] text-[15.03px] font-[300] font-['Inter'] capitalize tracking-tight">
@@ -179,34 +238,46 @@ export default function Game() {
                       </div>
                       <div className="px-[7.93px] py-[6px] bg-[#d9d9d9]/5 rounded-[7.51px] justify-center items-center gap-[9.91px] flex">
                         <div className="text-[#ffffff]/80 text-[15.03px] font-medium font-['Inter'] capitalize">
-                          score:100
+                          score:112
+                        </div>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+
+              </div>
+
+<div
+        className="w-24 h-24 cursor-pointer  rounded-[12.47px] transition-colors"
+        style={{ backgroundColor: box1Color }}
+        onClick={() => changeColor(1)}
+      >
+              <div className="w-[362.81px] h-[94px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-start gap-2.5 flex">
+                <div className="w-[227.47px] mx-[14px] h-[61.47px] justify-start items-center gap-[15.03px] inline-flex">
+                  <div className="w-[61.47px] h-[61.47px]  bg-[url(src/assets/avatar/2.png)] bg-cover bg-no-repeat bg-center rounded-full" />
+                  <div className="w-[157.77px] flex-col justify-start items-start gap-[5.63px] inline-flex">
+                    <div className="self-stretch text-[#ffffff] text-[16.90px] font-semibold font-['Inter'] capitalize tracking-tight">
+                    Shinchan
+                    </div>
+                    <div className="self-stretch justify-start items-center gap-[9.39px] inline-flex">
+                      <div className="text-[#ffffff] text-[15.03px] font-[300] font-['Inter'] capitalize tracking-tight">
+                        join
+                      </div>
+                      <div className="px-[7.93px] py-[6px] bg-[#d9d9d9]/5 rounded-[7.51px] justify-center items-center gap-[9.91px] flex">
+                        <div className="text-[#ffffff]/80 text-[15.03px] font-medium font-['Inter'] capitalize">
+                          score:120
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="w-[362.81px] h-[94px] bg-[#d9d9d9]/5 rounded-[12.47px] flex-col justify-center items-start gap-2.5 flex">
-                <div className="w-[227.47px] mx-[14px] h-[61.47px] justify-start items-center gap-[15.03px] inline-flex">
-                  <div className="w-[61.47px] h-[61.47px] bg-[#262628] rounded-full" />
-                  <div className="w-[157.77px] flex-col justify-start items-start gap-[5.63px] inline-flex">
-                    <div className="self-stretch text-[#ffffff] text-[16.90px] font-semibold font-['Inter'] capitalize tracking-tight">
-                      nobita
-                    </div>
-                    <div className="self-stretch justify-start items-center gap-[9.39px] inline-flex">
-                      <div className="text-[#ffffff] text-[15.03px] font-[300] font-['Inter'] capitalize tracking-tight">
-                        join
-                      </div>
-                      <div className="px-[7.93px] py-[6px] bg-[#d9d9d9]/5 rounded-[7.51px] justify-center items-center gap-[9.91px] flex">
-                        <div className="text-[#ffffff]/80 text-[15.03px] font-medium font-['Inter'] capitalize">
-                          score:100
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
               {/* ...other agent card */}
+            
+
+
             </div>
           </div>
           <div className="self-stretch h-[204.35px] flex-col justify-start items-start gap-[19.83px] flex">
