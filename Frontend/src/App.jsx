@@ -7,7 +7,7 @@ import Layout from "./Layout";
 import Agent from "./Agent";
 import Game from "./Game";
 // import ChessGame from "./ChessGame"; // Import the chess game component here
-import ChessGame from "./chessGame";
+import ChessGame from "./ChessGame";
 
 export default function App() {
   return (
@@ -16,7 +16,7 @@ export default function App() {
         {/* Parent Route for Tabs */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Discover />} />{/* Default Tab */}
-          <Route path="Game" element={<Game />}/>
+          <Route path="Game" element={<Game />} />
           <Route path="Agent" element={<Agent />} /> {/* Use lowercase */}
           <Route path="Profile" element={<Profile />} /> {/* Use lowercase */}
         </Route>
